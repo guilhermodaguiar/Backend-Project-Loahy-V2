@@ -21,8 +21,8 @@ Voor het **clonen** van de repository voor Loahy wordt verwezen naar de links in
 
 | Soort | URL                                                                |
 |-------|--------------------------------------------------------------------|
-| HTTPS | `https://github.com/guilhermodaguiar/Backend-Project-Loahy-V1.git` |
-| SSH   | `git@github.com:guilhermodaguiar/Backend-Project-Loahy-V1.git`     |
+| HTTPS | `https://github.com/guilhermodaguiar/Backend-Project-Loahy-V2.git` |
+| SSH   | `git@github.com:guilhermodaguiar/Backend-Project-Loahy-V2.git`     |
 
 
 ## Map Guide
