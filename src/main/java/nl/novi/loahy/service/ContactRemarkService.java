@@ -1,0 +1,84 @@
+package nl.novi.loahy.service;
+
+import nl.novi.loahy.dtos.ContactRemarkDto;
+import nl.novi.loahy.exeptions.ContactNotFoundException;
+import nl.novi.loahy.models.ContactRemark;
+import nl.novi.loahy.repository.ContactRemarkRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ContactRemarkService {
+
+    @Autowired
+    private final ContactRemarkRepository contactRemarkRepository;
+
+    @Autowired
+    public ContactRemarkService(ContactRemarkRepository contactRemarkRepository) {
+        this.contactRemarkRepository = contactRemarkRepository;
+    }
+
+    public List<ContactRemarkDto> getAllContacts() {
+        List<ContactRemarkDto> collection = new ArrayList<>();
+        List<ContactRemark> list = contactRemarkRepository.findAll();
+        for (ContactRemark contactRemark : list) {
+            collection.add(fromContact(contactRemark));
+        }
+        return collection;
+    }
+
+
+    public ContactRemarkDto getContactByName(String contactName) {
+        new ContactRemarkDto();
+        ContactRemarkDto contactRemarkDto;
+        Optional<ContactRemark> contact = contactRemarkRepository.findById(contactName);
+        if (contact.isPresent()) {
+            contactRemarkDto = fromContact(contact.get());
+        } else {
+            throw new ContactNotFoundException(contactName);
+        }
+        return contactRemarkDto;
+    }
+
+
+    public String createRemark(ContactRemarkDto contactRemarkDto) {
+        ContactRemark newContactRemark = contactRemarkRepository.save(toContact(contactRemarkDto));
+        return newContactRemark.getContactName();
+    }
+
+
+    public void deleteContact(String contactName) {
+        contactRemarkRepository.deleteById(contactName);
+    }
+
+
+    public static ContactRemarkDto fromContact(ContactRemark contactRemark) {
+
+        var contactDto = new ContactRemarkDto();
+
+        contactDto.contactName = contactRemark.getContactName();
+        contactDto.contactEmail = contactRemark.getContactEmail();
+        contactDto.contactOrganisation = contactRemark.getContactOrganisation();
+        contactDto.contactPhone = contactRemark.getContactPhone();
+        contactDto.remark = contactRemark.getRemark();
+
+        return contactDto;
+    }
+
+    public ContactRemark toContact(ContactRemarkDto contactRemarkDto) {
+
+        var contact = new ContactRemark();
+
+        contact.setContactName(contactRemarkDto.getContactName());
+        contact.setContactPhone(contactRemarkDto.getContactPhone());
+        contact.setContactEmail(contactRemarkDto.getContactEmail());
+        contact.setContactOrganisation(contactRemarkDto.getContactOrganisation());
+        contact.setRemark(contactRemarkDto.getRemark());
+
+        return contact;
+    }
+}
