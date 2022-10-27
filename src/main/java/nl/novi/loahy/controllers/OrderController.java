@@ -4,7 +4,7 @@ package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.dtos.OrderDto;
 import nl.novi.loahy.dtos.OrderInputDto;
-import nl.novi.loahy.service.OrderService;
+import nl.novi.loahy.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

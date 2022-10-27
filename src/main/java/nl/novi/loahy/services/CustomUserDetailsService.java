@@ -1,4 +1,4 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 
 import nl.novi.loahy.dtos.UserDto;
@@ -24,13 +24,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userService = userService;
     }
 
-    //@Autowired
-    //private AuthorityService authorityService;
-
     @Override
     public UserDetails loadUserByUsername(String userEmail) {
         UserDto userDto = userService.getUserByUserEmail(userEmail);
-
 
         String password = userDto.getUserPassword();
 

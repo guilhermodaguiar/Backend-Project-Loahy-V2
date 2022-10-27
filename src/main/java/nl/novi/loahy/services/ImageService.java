@@ -1,7 +1,7 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.models.FileUploadResponse;
-import nl.novi.loahy.repository.FileUploadRepository;
+import nl.novi.loahy.repositories.FileUploadRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

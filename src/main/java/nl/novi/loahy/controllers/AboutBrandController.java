@@ -2,7 +2,7 @@ package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.dtos.AboutBrandDto;
 import nl.novi.loahy.dtos.AboutBrandInputDto;
-import nl.novi.loahy.service.AboutBrandService;
+import nl.novi.loahy.services.AboutBrandService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

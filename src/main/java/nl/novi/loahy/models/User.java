@@ -12,14 +12,16 @@ public class User {
     @Id
     @Column(nullable = false, unique = true)
     private String userEmail;
+
+    @Column(nullable = false)
+    private  Long userId;
+
     @Column(nullable = false, length = 255)
     private String userPassword;
-    @Column
-    private String userName;
-    @Column
-    private String userAdres;
-    @Column
-    private Long userPhone;
+
+    @OneToOne
+    Customer customer;
+
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -44,22 +46,6 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserAdres() {
-        return userAdres;
-    }
-
-    public void setUserAdres(String userAdres) {
-        this.userAdres = userAdres;
-    }
-
-    public Long getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(Long userPhone) {
-        this.userPhone = userPhone;
-    }
-
     public String getUserPassword() {
         return userPassword;
     }
@@ -77,13 +63,6 @@ public class User {
         this.authorities.remove(authority);
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
@@ -103,6 +82,22 @@ public class User {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
 

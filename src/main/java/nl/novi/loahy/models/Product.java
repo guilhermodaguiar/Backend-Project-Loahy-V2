@@ -21,19 +21,18 @@ public class Product{
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-    @Column
+    @Column(name = "product_id")
     private Integer productId;
-    @Column
+    @Column(name = "product_name")
     private String productName;
-    @Column(columnDefinition = "TEXT")
-    private String productInformation;
-    @Column
+    @Column(name = "product_description",
+            columnDefinition = "TEXT")
+    private String productDescription;
+    @Column(name = "product_price")
     private Double productPrice;
-    @Column
-    private Integer productQuantity;
 
     @OneToOne
-    FileUploadResponse file;
+    FileUploadResponse image;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
@@ -51,13 +50,11 @@ public class Product{
             Integer productId,
             String productName,
             String productInformation,
-            Double productPrice,
-            Integer productQuantity) {
+            Double productPrice) {
         this.productId = productId;
         this.productName = productName;
-        this.productInformation = productInformation;
+        this.productDescription = productInformation;
         this.productPrice = productPrice;
-        this.productQuantity = productQuantity;
     }
 
     public Product() {
@@ -80,12 +77,12 @@ public class Product{
         this.productName = productName;
     }
 
-    public String getProductInformation() {
-        return productInformation;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setProductInformation(String productInformation) {
-        this.productInformation = productInformation;
+    public void setProductDescription(String productInformation) {
+        this.productDescription = productInformation;
     }
 
     public Double getProductPrice() {
@@ -96,20 +93,13 @@ public class Product{
         this.productPrice = productPrice;
     }
 
-    public Integer getProductQuantity() {
-        return productQuantity;
+
+    public FileUploadResponse getImage() {
+        return image;
     }
 
-    public void setProductQuantity(Integer productQuantity) {
-        this.productQuantity = productQuantity;
-    }
-
-    public FileUploadResponse getFile() {
-        return file;
-    }
-
-    public void setFile(FileUploadResponse file) {
-        this.file = file;
+    public void setImage(FileUploadResponse file) {
+        this.image = file;
     }
 
     public Order getOrder() {

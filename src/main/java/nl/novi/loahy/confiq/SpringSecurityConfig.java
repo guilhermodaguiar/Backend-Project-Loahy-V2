@@ -1,7 +1,7 @@
 package nl.novi.loahy.confiq;
 
-import nl.novi.loahy.filter.JwtRequestFilter;
-import nl.novi.loahy.service.CustomUserDetailsService;
+import nl.novi.loahy.filters.JwtRequestFilter;
+import nl.novi.loahy.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

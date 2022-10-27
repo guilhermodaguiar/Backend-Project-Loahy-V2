@@ -8,8 +8,6 @@ public class ProductDto {
 
     public String productInformation;
 
-    public Integer productQuantity;
-
     public Double productPrice;
 
     public OrderDto orderDto;
@@ -39,13 +37,6 @@ public class ProductDto {
         this.productInformation = productInformation;
     }
 
-    public Integer getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(Integer productQuantity) {
-        this.productQuantity = productQuantity;
-    }
 
     public Double getProductPrice() {
         return productPrice;

@@ -6,7 +6,6 @@ public class ProductInputDto {
 
     public String productInformation;
 
-    public Integer productQuantity;
 
     public Double productPrice;
 
@@ -26,13 +25,6 @@ public class ProductInputDto {
         this.productInformation = productInformation;
     }
 
-    public Integer getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(Integer productQuantity) {
-        this.productQuantity = productQuantity;
-    }
 
     public Double getProductPrice() {
         return productPrice;

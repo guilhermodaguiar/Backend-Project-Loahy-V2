@@ -1,10 +1,10 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.AboutBrandDto;
 import nl.novi.loahy.dtos.AboutBrandInputDto;
-import nl.novi.loahy.exeptions.AboutBrandNotFoundException;
+import nl.novi.loahy.exceptions.AboutBrandNotFoundException;
 import nl.novi.loahy.models.AboutBrand;
-import nl.novi.loahy.repository.AboutBrandRepository;
+import nl.novi.loahy.repositories.AboutBrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.ContactRemarkDto;
-import nl.novi.loahy.exeptions.ContactNotFoundException;
+import nl.novi.loahy.exceptions.ContactNotFoundException;
 import nl.novi.loahy.models.ContactRemark;
-import nl.novi.loahy.repository.ContactRemarkRepository;
+import nl.novi.loahy.repositories.ContactRemarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

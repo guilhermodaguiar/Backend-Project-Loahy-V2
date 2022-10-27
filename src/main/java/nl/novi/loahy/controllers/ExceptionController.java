@@ -1,6 +1,6 @@
 package nl.novi.loahy.controllers;
 
-import nl.novi.loahy.exeptions.*;
+import nl.novi.loahy.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseEntity<Object> exception(UserNotFoundException exception) {
+    @ExceptionHandler(value = UserEmailNotFoundException.class)
+    public ResponseEntity<Object> exception(UserEmailNotFoundException exception) {
 
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
 

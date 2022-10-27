@@ -1,10 +1,10 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.ShoppingCartDto;
 import nl.novi.loahy.dtos.ShoppingCartInputDto;
-import nl.novi.loahy.exeptions.ShoppingCartNotFoundException;
+import nl.novi.loahy.exceptions.ShoppingCartNotFoundException;
 import nl.novi.loahy.models.ShoppingCart;
-import nl.novi.loahy.repository.ShoppingCartRepository;
+import nl.novi.loahy.repositories.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

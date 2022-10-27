@@ -1,12 +1,12 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.ProductDto;
 import nl.novi.loahy.dtos.ProductInputDto;
-import nl.novi.loahy.exeptions.ProductNotFoundException;
+import nl.novi.loahy.exceptions.ProductNotFoundException;
 import nl.novi.loahy.models.FileUploadResponse;
 import nl.novi.loahy.models.Product;
-import nl.novi.loahy.repository.FileUploadRepository;
-import nl.novi.loahy.repository.ProductRepository;
+import nl.novi.loahy.repositories.FileUploadRepository;
+import nl.novi.loahy.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,7 +85,7 @@ public class ProductService {
         if (optionalProduct.isPresent() && fileUploadResponse.isPresent()) {
             FileUploadResponse image = fileUploadResponse.get();
             Product product = optionalProduct.get();
-            product.setFile(image);
+            product.setImage(image);
             productRepository.save(product);
         }
     }
@@ -95,10 +95,9 @@ public class ProductService {
         var productDto = new ProductDto();
 
         productDto.productId = product.getProductId();
-        productDto.productInformation = product.getProductInformation();
+        productDto.productInformation = product.getProductDescription();
         productDto.productName = product.getProductName();
         productDto.productPrice = product.getProductPrice();
-        productDto.productQuantity = product.getProductQuantity();
 
         return productDto;
     }
@@ -108,9 +107,8 @@ public class ProductService {
         var product = new Product();
 
         product.setProductName(productDto.getProductName());
-        product.setProductInformation(productDto.getProductInformation());
+        product.setProductDescription(productDto.getProductInformation());
         product.setProductPrice(productDto.getProductPrice());
-        product.setProductQuantity(productDto.getProductQuantity());
 
         return product;
     }

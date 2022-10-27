@@ -1,4 +1,4 @@
-package nl.novi.loahy.repository;
+package nl.novi.loahy.repositories;
 
 import nl.novi.loahy.models.ShoppingCartProduct;
 import nl.novi.loahy.models.ShoppingCartProductKey;

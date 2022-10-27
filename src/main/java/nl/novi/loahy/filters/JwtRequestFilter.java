@@ -1,6 +1,6 @@
-package nl.novi.loahy.filter;
+package nl.novi.loahy.filters;
 
-import nl.novi.loahy.service.CustomUserDetailsService;
+import nl.novi.loahy.services.CustomUserDetailsService;
 import nl.novi.loahy.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;

@@ -2,15 +2,17 @@ package nl.novi.loahy.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "image")
 public class FileUploadResponse {
     @Id
-    private String fileName;
+    String fileName;
 
-    private String contentType;
+    String contentType;
 
-    private String url;
+    String url;
 
     public FileUploadResponse(String fileName, String contentType, String url) {
         this.fileName = fileName;
@@ -25,20 +27,20 @@ public class FileUploadResponse {
         return fileName;
     }
 
-    public String getContentType() {
-        return contentType;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
+    public String getContentType() {
+        return contentType;
+    }
+
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public void setUrl(String url) {

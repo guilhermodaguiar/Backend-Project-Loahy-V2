@@ -2,8 +2,8 @@ package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.dtos.ProductDto;
 import nl.novi.loahy.dtos.WishlistDto;
-import nl.novi.loahy.service.WishlistProductService;
-import nl.novi.loahy.service.WishlistService;
+import nl.novi.loahy.services.WishlistProductService;
+import nl.novi.loahy.services.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

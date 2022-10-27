@@ -1,7 +1,7 @@
 package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.models.FileUploadResponse;
-import nl.novi.loahy.service.ImageService;
+import nl.novi.loahy.services.ImageService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,7 +39,7 @@ public class ImageController {
 
 
     @GetMapping("/products/image-download/{fileName}")
-    ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
+    public ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
         Resource resource = imageService.downLoadFile(fileName);
 

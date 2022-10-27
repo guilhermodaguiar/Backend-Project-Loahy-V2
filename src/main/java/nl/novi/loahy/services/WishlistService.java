@@ -1,9 +1,9 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.WishlistDto;
-import nl.novi.loahy.exeptions.WishlistNotFoundException;
+import nl.novi.loahy.exceptions.WishlistNotFoundException;
 import nl.novi.loahy.models.Wishlist;
-import nl.novi.loahy.repository.WishlistRepository;
+import nl.novi.loahy.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

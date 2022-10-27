@@ -1,6 +1,6 @@
 package nl.novi.loahy.controllers;
 
-import nl.novi.loahy.service.ShoppingCartProductService;
+import nl.novi.loahy.services.ShoppingCartProductService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

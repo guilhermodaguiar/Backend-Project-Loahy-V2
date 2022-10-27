@@ -2,8 +2,8 @@ package nl.novi.loahy.controllers;
 
 
 import nl.novi.loahy.dtos.UserDto;
-import nl.novi.loahy.exeptions.BadRequestException;
-import nl.novi.loahy.service.UserService;
+import nl.novi.loahy.exceptions.BadRequestException;
+import nl.novi.loahy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +42,7 @@ public class UserController {
         return ResponseEntity.ok().body(optionalUser);
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/create")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
 
         String newUserEmail = userService.createUser(userDto);
@@ -59,9 +59,9 @@ public class UserController {
     @PutMapping(value = "/{user-email}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("user-email")String userEmail, @RequestBody UserDto userDto) {
 
-       userService.updateUser(userEmail, userDto);
+        userService.updateUser(userEmail, userDto);
 
-       return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
 
     }
 

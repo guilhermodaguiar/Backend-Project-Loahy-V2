@@ -2,7 +2,7 @@ package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.payload.AuthenticationRequest;
 import nl.novi.loahy.payload.AuthenticationResponse;
-import nl.novi.loahy.service.CustomUserDetailsService;
+import nl.novi.loahy.services.CustomUserDetailsService;
 import nl.novi.loahy.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

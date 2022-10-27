@@ -4,8 +4,8 @@ import nl.novi.loahy.dtos.ProductDto;
 import nl.novi.loahy.dtos.ProductInputDto;
 import nl.novi.loahy.dtos.WishlistDto;
 import nl.novi.loahy.models.FileUploadResponse;
-import nl.novi.loahy.service.ProductService;
-import nl.novi.loahy.service.WishlistProductService;
+import nl.novi.loahy.services.ProductService;
+import nl.novi.loahy.services.WishlistProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @PostMapping(value ="")
-    ResponseEntity<Object>createProduct(@RequestBody ProductInputDto inputDto) {
+    public ResponseEntity<Object>createProduct(@RequestBody ProductInputDto inputDto) {
         ProductDto productDto = productService.createProduct(inputDto);
 
         return ResponseEntity.created(null).body(productDto);

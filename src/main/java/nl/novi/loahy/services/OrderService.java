@@ -1,14 +1,14 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 
 import nl.novi.loahy.dtos.OrderDto;
 import nl.novi.loahy.dtos.OrderInputDto;
-import nl.novi.loahy.exeptions.OrderNotFoundException;
+import nl.novi.loahy.exceptions.OrderNotFoundException;
 import nl.novi.loahy.models.Order;
 import nl.novi.loahy.models.Product;
-import nl.novi.loahy.repository.OrderRepository;
-import nl.novi.loahy.repository.ProductRepository;
-import nl.novi.loahy.repository.UserRepository;
+import nl.novi.loahy.repositories.OrderRepository;
+import nl.novi.loahy.repositories.ProductRepository;
+import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

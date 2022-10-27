@@ -1,7 +1,7 @@
 package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.dtos.ContactRemarkDto;
-import nl.novi.loahy.service.ContactRemarkService;
+import nl.novi.loahy.services.ContactRemarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package nl.novi.loahy.repository;
+package nl.novi.loahy.repositories;
 
 import nl.novi.loahy.models.WishlistProduct;
 import nl.novi.loahy.models.WishlistProductKey;

@@ -1,8 +1,9 @@
-package nl.novi.loahy.service;
+package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.UserDto;
 import nl.novi.loahy.models.User;
-import nl.novi.loahy.repository.UserRepository;
+import nl.novi.loahy.repositories.UserRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,6 +27,7 @@ class UserServiceTest {
     UserService sut;
 
     @Test
+    @DisplayName("Should assign the person to the user when the person and user exist")
     public void whenUserEmailExistsAnExceptionIsThrown(){
 
         //Arrange
