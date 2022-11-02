@@ -11,7 +11,7 @@ public class CustomerDto {
     public String customerHouseNumberAddition;
     public String customerCity;
     public String customerZipcode;
-    public String customerPhone;
+    public Long customerPhone;
 
 
     public static CustomerDto fromCustomer(Customer customer) {

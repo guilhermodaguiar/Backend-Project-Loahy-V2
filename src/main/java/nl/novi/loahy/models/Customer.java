@@ -1,26 +1,43 @@
 package nl.novi.loahy.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 
 @Entity
+@Table(name = "customers")
 public class Customer {
 
-     @GeneratedValue
-     @Id
-     Long customerId;
 
-     String customerFirstName;
-     String customerLastName;
-     String customerStreetName;
-     String customerHouseNumber;
-     String customerHouseNumberAddition;
-     String customerCity;
-     String customerZipcode;
-     String customerPhone;
+    @Id
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_customer", value = "product_sequence"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "5004"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+            }
+    )
+    Long customerId;
+    @Column(name = "customer_first_name")
+    String customerFirstName;
+    @Column(name = "customer_last_name")
+    String customerLastName;
+    @Column(name = "customer_street_name")
+    String customerStreetName;
+    @Column(name = "customer_house_number")
+    String customerHouseNumber;
+    @Column(name = "customer_add_number")
+    String customerHouseNumberAddition;
+    @Column(name = "customer_city")
+    String customerCity;
+    @Column(name = "customer_zipcode")
+    String customerZipcode;
+    @Column(name = "customer_phone")
+    Long customerPhone;
 
 
     @OneToOne(mappedBy = "customer")
@@ -90,11 +107,11 @@ public class Customer {
         this.customerZipcode = customerZipcode;
     }
 
-    public String getCustomerPhone() {
+    public Long getCustomerPhone() {
         return customerPhone;
     }
 
-    public void setCustomerPhone(String customerPhone) {
+    public void setCustomerPhone(Long customerPhone) {
         this.customerPhone = customerPhone;
     }
 

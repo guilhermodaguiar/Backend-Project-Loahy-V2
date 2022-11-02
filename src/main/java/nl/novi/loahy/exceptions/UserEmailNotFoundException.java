@@ -1,6 +1,9 @@
 package nl.novi.loahy.exceptions;
 
- public class UserEmailNotFoundException extends RuntimeException {
+import java.io.Serial;
+
+public class UserEmailNotFoundException extends RuntimeException {
+     @Serial
      private static final long serialVersionUID = 1L;
 
 

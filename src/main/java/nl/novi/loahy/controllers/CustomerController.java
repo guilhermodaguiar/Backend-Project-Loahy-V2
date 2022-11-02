@@ -1,14 +1,12 @@
 package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.dtos.CustomerDto;
-import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.models.Customer;
 import nl.novi.loahy.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -23,60 +21,34 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/users")
-    @Transactional
-    public List<CustomerDto> getCustomerList(@RequestParam(value = "firstname", required = false, defaultValue = "")String customerFirstname,
-                                               @RequestParam(value = "lastname", required = false, defaultValue = "")String customerLastname){
+    @GetMapping(value = "")
+    public ResponseEntity<List<CustomerDto>> getUsers() {
 
-        var customerDtos = new ArrayList<CustomerDto>();
+        List<CustomerDto> userDtos = customerService.getCustomers();
 
-        List<Customer> customerList;
-
-        if (customerFirstname == null && customerLastname == null) {
-            customerList = CustomerService.getCustomerList();
-
-        } else if (customerFirstname != null && customerLastname == null) {
-            customerList = CustomerService.findCustomerListByCustomerFirstname(customerFirstname);
-
-        }else {
-            customerList = CustomerService.findCustomerListByCustomerLastname(customerLastname);
-        }
-
-        for (Customer customer : customerList) {
-            customerDtos.add(customerDtos.fromCustomer(customer));
-        }
-        return customerDtos;
+        return ResponseEntity.ok().body(userDtos);
     }
 
-    @GetMapping("/{id}")
-    public customerDto getPerson(@PathVariable("id")Long id) {
+    @GetMapping(value = "/{username}")
+    public ResponseEntity<CustomerDto> getUser(@PathVariable("username") Long customerId) {
 
-        var customer = customerService.getCustomer(id);
+        CustomerDto optionalUser = customerService.getCustomer(customerId);
 
-        return CustomerDto.fromCustomer(customer);
-
-    }
-
-    @PostMapping
-    public CustomerDto savePerson(@RequestBody CustomerInputDto dto) {
-
-        var customer = customerService.saveCustomer(dto.toCustomer());
-
-        return CustomerDto.fromCustomer(customer);
+        return ResponseEntity.ok().body(optionalUser);
     }
 
     @PutMapping("/{id}")
-    public CustomerDto updateCustomer(@PathVariable Long id,
+    public CustomerDto updateCustomer(@PathVariable Long customerId,
                                   @RequestBody Customer customer) {
-        customerService.updateCustomer(id, customer);
+        customerService.updateCustomer(customerId, customer);
 
         return CustomerDto.fromCustomer(customer);
     }
 
-
-    @DeleteMapping(path = "{id}")
-    public void deletePerson(
-            @PathVariable("id") Long customerId) {
+    @DeleteMapping(value = "{id}")
+    public void deleteCustomer(@PathVariable("id") Long customerId) {
         customerService.deleteCustomer(customerId);
     }
 }
+
+

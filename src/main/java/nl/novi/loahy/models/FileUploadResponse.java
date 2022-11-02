@@ -1,6 +1,9 @@
 package nl.novi.loahy.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -8,6 +11,16 @@ import javax.persistence.Table;
 @Table(name = "image")
 public class FileUploadResponse {
     @Id
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "id_sequence"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "80"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+            }
+    )
     String fileName;
 
     String contentType;

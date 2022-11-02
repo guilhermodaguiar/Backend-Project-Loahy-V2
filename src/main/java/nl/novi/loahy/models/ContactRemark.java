@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="remarks")
+@Table(name = "remarks")
 public class ContactRemark {
 
     @Id
@@ -22,8 +22,6 @@ public class ContactRemark {
     private String contactOrganisation;
     @Column(columnDefinition = "TEXT")
     private String remark;
-
-
 
 
     public String getContactName() {

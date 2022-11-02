@@ -56,7 +56,6 @@ public class ShoppingCartProductService {
 
             productDto.setProductId(product.getProductId());
             productDto.setProductName(product.getProductName());
-            productDto.setProductQuantity(product.getProductQuantity());
 
             productDtos.add(productDto);
         }
