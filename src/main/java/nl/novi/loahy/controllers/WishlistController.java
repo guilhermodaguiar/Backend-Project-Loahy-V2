@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/wishlists")
 public class WishlistController {
@@ -58,7 +59,7 @@ public class WishlistController {
 
 
     @GetMapping("/products/{wishlistId}")
-    public Collection<ProductDto> getProductsByWishlistId(@PathVariable("wishlistId") Integer wishlistId){
+    public Collection<ProductDto> getProductsByWishlistId(@PathVariable("wishlistId") Integer wishlistId) {
         return wishlistProductService.getWishlistProductsByWishlistId(wishlistId);
     }
 }

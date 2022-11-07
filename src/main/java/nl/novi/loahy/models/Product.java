@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="products")
-public class Product{
+@Table(name = "products")
+public class Product {
 
     @Id
     @GeneratedValue(generator = "sequence-generator")
@@ -31,6 +31,7 @@ public class Product{
     @Column(name = "product_price")
     private Double productPrice;
 
+
     @OneToOne
     FileUploadResponse image;
 
@@ -50,16 +51,18 @@ public class Product{
             Integer productId,
             String productName,
             String productInformation,
-            Double productPrice) {
+            Double productPrice, FileUploadResponse image) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productInformation;
         this.productPrice = productPrice;
+        this.image = image;
     }
 
     public Product() {
 
     }
+
 
     public Integer getProductId() {
         return productId;

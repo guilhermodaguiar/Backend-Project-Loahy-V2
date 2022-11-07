@@ -1,13 +1,26 @@
 package nl.novi.loahy.dtos;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nl.novi.loahy.models.FileUploadResponse;
+
 public class ProductInputDto {
 
     public String productName;
 
     public String productInformation;
 
-
     public Double productPrice;
+
+    @JsonSerialize
+    FileUploadResponse image;
+
+    public FileUploadResponse getImage() {
+        return image;
+    }
+
+    public void setImage(FileUploadResponse image) {
+        this.image = image;
+    }
 
     public String getProductName() {
         return productName;

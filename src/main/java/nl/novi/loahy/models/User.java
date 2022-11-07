@@ -8,28 +8,28 @@ import java.util.Set;
 
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
-    @Id
-    @Column(nullable = false, unique = true)
-    private String userEmail;
-
+    @Column()
     @GeneratedValue(generator = "sequence-generator")
     @GenericGenerator(
             name = "sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "id_sequence"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "2005"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "2006"),
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-    @Column(nullable = false)
-    private  Long userId;
+    private Long userId;
+
+    @Id
+    @Column(nullable = false, unique = true)
+    private String userEmail;
 
     @Column(nullable = false, length = 255)
-    private String userPassword;
+    private String password;
 
     @OneToOne
     Customer customer;
@@ -59,18 +59,22 @@ public class User {
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return password;
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        this.password = userPassword;
     }
 
 
-    public Set<Authority> getAuthorities() { return authorities; }
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
+
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }

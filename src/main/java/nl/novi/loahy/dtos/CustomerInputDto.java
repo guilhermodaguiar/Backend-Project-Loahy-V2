@@ -13,7 +13,7 @@ public class CustomerInputDto {
     public String customerHouseNumberAddition;
     public String customerCity;
     public String customerZipcode;
-    public String customerPhone;
+    public Long customerPhone;
 
     public Customer toCustomer() {
 

@@ -26,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<UserDto>> getAllUsers() {
 
         List<UserDto> userDtos = userService.getAllUsers();
@@ -56,8 +56,8 @@ public class UserController {
                 .build();
     }
 
-    @PutMapping(value = "/{user-email}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("user-email")String userEmail, @RequestBody UserDto userDto) {
+    @PutMapping(value = "/{user_email}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable("user_email")String userEmail, @RequestBody UserDto userDto) {
 
         userService.updateUser(userEmail, userDto);
 
@@ -65,19 +65,19 @@ public class UserController {
 
     }
 
-    @DeleteMapping(value = "/{user-email}")
-    public ResponseEntity<UserDto>deleteUser(@PathVariable("user-email") String userEmail) {
+    @DeleteMapping(value = "delete/{user_email}")
+    public ResponseEntity<UserDto>deleteUser(@PathVariable("user_email") String userEmail) {
         userService.deleteUser(userEmail);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/{user-email}/authorities")
-    public ResponseEntity<Object> getUserAuthorities(@PathVariable("user-email") String costumerEmail) {
+    @GetMapping(value = "/{user_email}/authorities")
+    public ResponseEntity<Object> getUserAuthorities(@PathVariable("user_email") String costumerEmail) {
         return ResponseEntity.ok().body(userService.getAuthorities(costumerEmail));
     }
 
-    @PostMapping(value = "/{user-email}/authorities")
-    public ResponseEntity<Object> addUserAuthority(@PathVariable("user-email") String userEmail, @RequestBody Map<String, Object> fields) {
+    @PostMapping(value = "/{user_email}/authorities")
+    public ResponseEntity<Object> addUserAuthority(@PathVariable("user_email") String userEmail, @RequestBody Map<String, Object> fields) {
         try {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(userEmail, authorityName);
@@ -88,8 +88,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(value = "/{user-email}/authorities/{authority}")
-    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("user-email") String userEmail, @PathVariable("authority") String authority) {
+    @DeleteMapping(value = "/{user_email}/authorities/{authority}")
+    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("user_email") String userEmail, @PathVariable("authority") String authority) {
         userService.removeAuthority(userEmail, authority);
         return ResponseEntity.noContent().build();
     }

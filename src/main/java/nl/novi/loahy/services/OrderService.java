@@ -11,6 +11,8 @@ import nl.novi.loahy.repositories.ProductRepository;
 import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import static nl.novi.loahy.dtos.ProductDto.transferToDto;
+
 import java.util.ArrayList;
 import java.util.List;
 

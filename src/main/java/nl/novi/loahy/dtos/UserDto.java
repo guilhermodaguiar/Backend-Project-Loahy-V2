@@ -9,49 +9,40 @@ import java.util.Set;
 public class UserDto {
 
     public String userEmail;
-    public String userPassword;
-    public String userName;
-    public String userAdres;
-    public Long userPhone;
+    public String password;
 
     public WishlistDto wishlistDto;
 
     public ShoppingCartDto shoppingCartDto;
 
+    public CustomerDto customerDto;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public CustomerDto getCustomerDto() {
+        return customerDto;
+    }
+
+    public void setCustomerDto(CustomerDto customerDto) {
+        this.customerDto = customerDto;
+    }
+
     @JsonDeserialize
     public Set<Authority> authorities;
 
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserAdres() {
-        return userAdres;
-    }
-
-    public void setUserAdres(String userAdres) {
-        this.userAdres = userAdres;
-    }
-
-    public Long getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(Long userPhone) {
-        this.userPhone = userPhone;
-    }
-
     public String getUserPassword() {
-        return userPassword;
+        return password;
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        this.password = userPassword;
     }
 
     public Set<Authority> getAuthorities() {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/shopping-carts")
 public class ShoppingCartController {
@@ -25,7 +26,7 @@ public class ShoppingCartController {
         this.shoppingCartProductService = shoppingCartProductService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<ShoppingCartDto>> getAllShoppingCarts() {
 
         List<ShoppingCartDto> shoppingCartDto = shoppingCartService.getAllShoppingCarts();
@@ -33,7 +34,7 @@ public class ShoppingCartController {
         return ResponseEntity.ok().body(shoppingCartDto);
     }
 
-    @PostMapping("")
+    @PostMapping("create")
     public ResponseEntity<ShoppingCartDto> createShoppingCart(@RequestBody ShoppingCartInputDto shoppingCartInputDto) {
 
         ShoppingCartDto shoppingCartDto = shoppingCartService.createShoppingCart(shoppingCartInputDto);
@@ -43,7 +44,7 @@ public class ShoppingCartController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateShoppingCart(@PathVariable("id") Integer shoppingCartId,
-                                                      @RequestBody ShoppingCartInputDto shoppingCartInputDto) {
+                                                     @RequestBody ShoppingCartInputDto shoppingCartInputDto) {
 
         ShoppingCartDto shoppingCartDto = shoppingCartService.updateShoppingCart(shoppingCartId, shoppingCartInputDto);
 
@@ -60,7 +61,7 @@ public class ShoppingCartController {
 
 
     @GetMapping("/products/{id}")
-    public Collection<ProductDto> getProductsByShoppingCartId(@PathVariable("id") Integer shoppingCartId){
+    public Collection<ProductDto> getProductsByShoppingCartId(@PathVariable("id") Integer shoppingCartId) {
         return shoppingCartProductService.getShoppingCartProductsByShoppingCartId(shoppingCartId);
     }
 }

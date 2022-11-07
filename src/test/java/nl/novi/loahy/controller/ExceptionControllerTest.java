@@ -1,7 +1,7 @@
 package nl.novi.loahy.controller;
 
 import nl.novi.loahy.controllers.ExceptionController;
-import nl.novi.loahy.exceptions.AboutBrandNotFoundException;
+import nl.novi.loahy.exceptions.ContactNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,14 +20,14 @@ class ExceptionControllerTest {
 
     @Test
     @DisplayName(
-            "Should return a response entity with the message and status code when the exception is AboutBrandNotFoundException")
-    void exceptionWhenAboutBrandNotFoundExceptionThenReturnResponseEntityWithMessageAndStatusCode() {
+            "Should return a response entity with the message and status code when the exception is ContactNotFoundException")
+    void exceptionWhenContactNotFoundExceptionThenReturnResponseEntityWithMessageAndStatusCode() {
 
         String message = "Record not found";
-        AboutBrandNotFoundException aboutBrandNotFoundException = new AboutBrandNotFoundException(message);
+        ContactNotFoundException contactNotFoundException = new ContactNotFoundException(message);
 
         ResponseEntity<Object> responseEntity =
-                exceptionController.exception(aboutBrandNotFoundException);
+                exceptionController.exception(contactNotFoundException);
 
         assertEquals(message, responseEntity.getBody());
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());

@@ -16,6 +16,7 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin
+@RequestMapping(value = "image")
 public class ImageController {
     private final ImageService imageService;
 
@@ -28,7 +29,7 @@ public class ImageController {
     @PostMapping("/products/image-upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
 
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/image-download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
         String contentType = file.getContentType();
 
@@ -52,6 +53,13 @@ public class ImageController {
         }
 
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename()).body(resource);
+    }
+
+    @DeleteMapping("/products/image-delete/")
+    ResponseEntity<Objects> deletePicture(@PathVariable String fileName){
+        imageService.deleteImage(fileName);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

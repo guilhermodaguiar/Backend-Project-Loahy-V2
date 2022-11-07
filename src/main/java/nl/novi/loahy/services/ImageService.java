@@ -23,13 +23,13 @@ public class ImageService {
     private Path fileStoragePath;
     private final String fileStorageLocation;
 
-    private final FileUploadRepository repo;
+    private final FileUploadRepository fileUploadRepository;
 
-    public ImageService(@Value("${my.upload_location}") String fileStorageLocation, FileUploadRepository repo) {
+    public ImageService(@Value("${my.upload_location}") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
 
         this.fileStorageLocation = fileStorageLocation;
-        this.repo = repo;
+        this.fileUploadRepository = fileUploadRepository;
 
         try {
             Files.createDirectories(fileStoragePath);
@@ -51,7 +51,7 @@ public class ImageService {
             throw new RuntimeException("Issue in storing the file", e);
         }
 
-        repo.save(new FileUploadResponse(fileName, file.getContentType(), url));
+        fileUploadRepository.save(new FileUploadResponse(fileName, file.getContentType(), url));
 
         return fileName;
     }
@@ -75,6 +75,9 @@ public class ImageService {
         }
     }
 
+    public void deleteImage(String fileName) {
+        fileUploadRepository.deleteById(fileName);
+    }
 }
 
 

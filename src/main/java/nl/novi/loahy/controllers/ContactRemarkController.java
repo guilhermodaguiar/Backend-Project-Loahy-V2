@@ -10,8 +10,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin
 @RestController
-@RequestMapping(value="/contact-remarks")
+@RequestMapping(value = "/contact-remarks")
 public class ContactRemarkController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class ContactRemarkController {
 
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/post")
     public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody ContactRemarkDto contactRemarkDto) {
 
         final String createdContact = contactRemarkService.createRemark(contactRemarkDto);

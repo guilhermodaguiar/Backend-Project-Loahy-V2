@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -21,7 +22,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "all")
     public ResponseEntity<List<OrderDto>> getAllOrders() {
         List<OrderDto> orderDtos = orderService.getAllOrders();
 
@@ -29,7 +30,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OrderDto> getOrder (@PathVariable("id") Integer orderId) {
+    public ResponseEntity<OrderDto> getOrder(@PathVariable("id") Integer orderId) {
 
         OrderDto order = orderService.getOrderById(orderId);
 
@@ -37,12 +38,8 @@ public class OrderController {
     }
 
 
-
-
-
-
-    @PostMapping(value = "")
-    public ResponseEntity<OrderDto> addOrder (@RequestBody OrderInputDto orderInputDto) {
+    @PostMapping(value = "create")
+    public ResponseEntity<OrderDto> addOrder(@RequestBody OrderInputDto orderInputDto) {
 
         OrderDto orderDto = orderService.addOrder(orderInputDto);
 
@@ -50,28 +47,27 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrderDto> updateOrder (@PathVariable("id") Integer orderId,
-                                                 @RequestBody OrderInputDto orderInputDto){
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable("id") Integer orderId,
+                                                @RequestBody OrderInputDto orderInputDto) {
 
         OrderDto orderDto = orderService.updateOrder(orderId, orderInputDto);
 
         return ResponseEntity.ok().body(orderDto);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<OrderDto> deleteOrder (@PathVariable("id") Integer orderId){
+    @DeleteMapping(value = "delete/{id}")
+    public ResponseEntity<OrderDto> deleteOrder(@PathVariable("id") Integer orderId) {
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}/{userId}")
-    public void assignUserToOrder (@PathVariable("id") Integer orderId, @PathVariable("userId") String userEmail)
-    {
-            orderService.assignUserToOrder(orderId, userEmail);
+    public void assignUserToOrder(@PathVariable("id") Integer orderId, @PathVariable("userId") String userEmail) {
+        orderService.assignUserToOrder(orderId, userEmail);
     }
 
     @PutMapping(value = "/{id}/{productId}")
-    public void assignProductToOrder (@PathVariable("id") Integer orderId, @PathVariable("productId") Integer productId){
+    public void assignProductToOrder(@PathVariable("id") Integer orderId, @PathVariable("productId") Integer productId) {
         orderService.assignProductToOrder(orderId, productId);
     }
 

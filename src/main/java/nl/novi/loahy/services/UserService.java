@@ -61,7 +61,7 @@ public class UserService {
             throw new UserEmailAlreadyExistException(userDto.userEmail);
         }
         User newUser = toUser(userDto);
-        newUser.setUserPassword(passwordEncoder.encode(userDto.userPassword));
+        newUser.setUserPassword(passwordEncoder.encode(userDto.password));
         userRepository.save(newUser);
         return newUser.getUserEmail();
     }
@@ -69,7 +69,7 @@ public class UserService {
     public void updateUser(String userEmail, UserDto newUser) {
         if (!userRepository.existsById(userEmail)) throw new UserEmailNotFoundException(userEmail);
         User user = userRepository.findById(userEmail).get();
-        user.setUserPassword(passwordEncoder.encode(newUser.userPassword));
+        user.setUserPassword(passwordEncoder.encode(newUser.password));
         user.setUserEmail(newUser.getUserEmail());
         userRepository.save(user);
     }
@@ -107,7 +107,7 @@ public class UserService {
         var userDto = new UserDto();
 
         userDto.userEmail = user.getUserEmail();
-        userDto.userPassword = user.getUserPassword();
+        userDto.password = user.getUserPassword();
         userDto.authorities = user.getAuthorities();
 
         return userDto;
@@ -128,7 +128,7 @@ public class UserService {
         var userDto = new UserDto();
 
         userDto.userEmail = user.getUserEmail();
-        userDto.userPassword = user.getUserPassword();
+        userDto.password = user.getUserPassword();
 
         return userDto;
     }

@@ -63,12 +63,6 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = AboutBrandNotFoundException.class)
-    public ResponseEntity<Object> exception(AboutBrandNotFoundException exception) {
-
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(value = CustomerNotFoundException.class)
     public ResponseEntity<Object> exception(CustomerNotFoundException exception) {
 

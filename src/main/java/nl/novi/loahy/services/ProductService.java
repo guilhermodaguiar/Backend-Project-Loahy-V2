@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static nl.novi.loahy.dtos.ProductDto.transferToDto;
+
 @Service
 public class ProductService {
 
@@ -78,29 +80,21 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
 
-    public void assignImageToProduct(String name, Integer productId) {
+    public void assignImageToProduct(String fileName, Integer productId) {
 
         Optional<Product> optionalProduct = productRepository.findById(productId);
-        Optional<FileUploadResponse> fileUploadResponse = uploadRepository.findByFileName(name);
+        Optional<FileUploadResponse> fileUploadResponse = uploadRepository.findByFileName(fileName);
+
         if (optionalProduct.isPresent() && fileUploadResponse.isPresent()) {
             FileUploadResponse image = fileUploadResponse.get();
             Product product = optionalProduct.get();
+
             product.setImage(image);
             productRepository.save(product);
         }
     }
 
-    public ProductDto transferToDto(Product product) {
 
-        var productDto = new ProductDto();
-
-        productDto.productId = product.getProductId();
-        productDto.productInformation = product.getProductDescription();
-        productDto.productName = product.getProductName();
-        productDto.productPrice = product.getProductPrice();
-
-        return productDto;
-    }
 
     public Product transferToProduct(ProductInputDto productDto) {
 
@@ -109,7 +103,7 @@ public class ProductService {
         product.setProductName(productDto.getProductName());
         product.setProductDescription(productDto.getProductInformation());
         product.setProductPrice(productDto.getProductPrice());
-
+        product.setImage(productDto.getImage());
         return product;
     }
 
