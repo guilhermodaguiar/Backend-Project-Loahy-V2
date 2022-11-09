@@ -3,6 +3,8 @@ package nl.novi.loahy.services;
 
 import nl.novi.loahy.dtos.OrderDto;
 import nl.novi.loahy.dtos.OrderInputDto;
+import nl.novi.loahy.dtos.ProductDto;
+import nl.novi.loahy.dtos.ProductInputDto;
 import nl.novi.loahy.exceptions.OrderNotFoundException;
 import nl.novi.loahy.models.Order;
 import nl.novi.loahy.models.Product;
@@ -49,7 +51,7 @@ public class OrderService {
                 orderDto.setUserDto(userService.transferToDto(or.getUser()));
             }
             if(or.getProducts() != null){
-              orderDto.setProductDto(productService.transferToDto((Product) or.getProducts()));
+              orderDto.setProductDto(ProductDto.transferToDto((Product) or.getProducts()));
             }
             return transferToDto(or);
         } else {
@@ -67,7 +69,7 @@ public class OrderService {
                 orderDto.setUserDto(userService.transferToDto(or.getUser()));
             }
             if(or.getProducts() != null){
-              orderDto.setProductDto(productService.transferToDto((Product) or.getProducts()));
+              orderDto.setProductDto(ProductDto.transferToDto((Product) or.getProducts()));
             }
             orderDtoList.add(orderDto);
         }

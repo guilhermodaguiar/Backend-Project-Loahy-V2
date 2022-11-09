@@ -30,13 +30,6 @@ public class WishlistService {
         return collection;
     }
 
-//    public WishlistDto createWishlist(WishlistInputDto wishlistInputDto) {
-//
-//        Wishlist wishlist = transferToWishlist(wishlistInputDto);
-//        wishlistRepository.save(wishlist);
-//
-//        return transferToDto(wishlist);
-//    }
 
     public WishlistDto addWishlist(WishlistDto wishlistDto) {
         Wishlist wl =  transferToWishlist(wishlistDto);

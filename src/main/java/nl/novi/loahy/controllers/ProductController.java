@@ -31,7 +31,7 @@ public class ProductController {
         this.wishlistProductService = wishlistProductService;
     }
 
-    @GetMapping
+    @GetMapping(value = "")
     @Transactional
     public ResponseEntity<List<ProductDto>> getAllProducts() {
 

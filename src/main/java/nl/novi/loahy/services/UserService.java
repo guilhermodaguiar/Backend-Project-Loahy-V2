@@ -6,6 +6,7 @@ import nl.novi.loahy.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy.models.Authority;
 import nl.novi.loahy.models.User;
+import nl.novi.loahy.repositories.CustomerRepository;
 import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,11 +22,14 @@ import java.util.Set;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -111,6 +115,19 @@ public class UserService {
         userDto.authorities = user.getAuthorities();
 
         return userDto;
+    }
+
+
+    public void assignCustomerToUser(Long customerId, String userEmail) {
+        var optionalUser = userRepository.findById(userEmail);
+        var optionalCustomer = customerRepository.findById(customerId);
+
+        if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
+            var user = optionalUser.get();
+            var customer = optionalCustomer.get();
+            user.setCustomer(customer);
+            userRepository.save(user);
+        }
     }
 
     public User toUser(UserDto userDto) {

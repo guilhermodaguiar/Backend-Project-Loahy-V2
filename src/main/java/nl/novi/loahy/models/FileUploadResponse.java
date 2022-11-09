@@ -3,11 +3,12 @@ package nl.novi.loahy.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.websocket.ClientEndpoint;
 
 @Entity
 @Table(name = "image")
 public class FileUploadResponse {
-    @Id
+
     @GeneratedValue(generator = "sequence-generator")
     @GenericGenerator(
             name = "sequence-generator",
@@ -18,7 +19,8 @@ public class FileUploadResponse {
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-
+    @Id
+    @Column()
     String fileName;
 
     String contentType;
