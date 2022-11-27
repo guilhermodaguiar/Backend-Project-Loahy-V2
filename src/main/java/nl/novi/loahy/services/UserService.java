@@ -2,6 +2,7 @@ package nl.novi.loahy.services;
 
 
 import nl.novi.loahy.dtos.UserDto;
+import nl.novi.loahy.exceptions.CustomerNotFoundException;
 import nl.novi.loahy.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy.models.Authority;
@@ -64,7 +65,7 @@ public class UserService {
         if (userExist(userDto.getUserEmail())) {
             throw new UserEmailAlreadyExistException(userDto.userEmail);
         }
-        User newUser = toUser(userDto);
+        User newUser = userRepository.save(toUser(userDto));
         newUser.setUserPassword(passwordEncoder.encode(userDto.password));
         userRepository.save(newUser);
         return newUser.getUserEmail();
@@ -83,26 +84,11 @@ public class UserService {
     }
 
 
-    public Set<Authority> getAuthorities(String userEmail) {
-        if (!userRepository.existsById(userEmail)) throw new UserEmailNotFoundException(userEmail);
-        User user = userRepository.findById(userEmail).get();
-        UserDto userDto = fromUser(user);
-        return userDto.getAuthorities();
-    }
-
     public void addAuthority(String userEmail, String authority) {
 
         if (!userRepository.existsById(userEmail)) throw new UserEmailNotFoundException(userEmail);
         User user = userRepository.findById(userEmail).get();
         user.addAuthority(new Authority(userEmail, authority));
-        userRepository.save(user);
-    }
-
-    public void removeAuthority(String userEmail, String authority) {
-        if (!userRepository.existsById(userEmail)) throw new UserEmailNotFoundException(userEmail);
-        User user = userRepository.findById(userEmail).get();
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
-        user.removeAuthority(authorityToRemove);
         userRepository.save(user);
     }
 
@@ -118,7 +104,7 @@ public class UserService {
     }
 
 
-    public void assignCustomerToUser(Long customerId, String userEmail) {
+    public void assignCustomerToUser(String userEmail, Long customerId) {
         var optionalUser = userRepository.findById(userEmail);
         var optionalCustomer = customerRepository.findById(customerId);
 
@@ -127,6 +113,8 @@ public class UserService {
             var customer = optionalCustomer.get();
             user.setCustomer(customer);
             userRepository.save(user);
+        } else {
+            throw new CustomerNotFoundException(customerId);
         }
     }
 

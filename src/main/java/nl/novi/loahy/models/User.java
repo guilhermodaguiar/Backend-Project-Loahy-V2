@@ -11,19 +11,6 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
-    @Column()
-    @GeneratedValue(generator = "sequence-generator")
-    @GenericGenerator(
-            name = "sequence-generator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "id_sequence"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "2006"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
-            }
-    )
-    private Long userId;
-
     @Id
     @Column(nullable = false, unique = true)
     private String userEmail;
@@ -106,14 +93,6 @@ public class User {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }
 

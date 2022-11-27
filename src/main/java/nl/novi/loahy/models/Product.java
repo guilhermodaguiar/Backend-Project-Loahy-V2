@@ -101,8 +101,8 @@ public class Product {
         return image;
     }
 
-    public void setImage(FileUploadResponse file) {
-        this.image = file;
+    public void setImage(FileUploadResponse image) {
+        this.image = image;
     }
 
     public Order getOrder() {

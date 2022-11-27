@@ -50,7 +50,7 @@ public class ProductController {
 
     }
 
-    @PostMapping(value ="")
+    @PostMapping(value ="/create")
     public ResponseEntity<Object>createProduct(@RequestBody ProductInputDto inputDto) {
         ProductDto productDto = productService.createProduct(inputDto);
 

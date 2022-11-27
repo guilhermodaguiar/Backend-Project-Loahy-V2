@@ -11,11 +11,13 @@ public class UserDto {
     public String userEmail;
     public String password;
 
+
     public WishlistDto wishlistDto;
 
     public ShoppingCartDto shoppingCartDto;
 
     public CustomerDto customerDto;
+
 
     public String getPassword() {
         return password;

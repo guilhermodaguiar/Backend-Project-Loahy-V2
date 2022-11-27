@@ -21,25 +21,31 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<List<CustomerDto>> getUsers() {
+    @GetMapping(value = "users")
+    public ResponseEntity<List<CustomerDto>> getCustomers() {
 
-        List<CustomerDto> userDtos = customerService.getCustomers();
+        List<CustomerDto> customerDtos = customerService.getCustomers();
 
-        return ResponseEntity.ok().body(userDtos);
+        return ResponseEntity.ok().body(customerDtos);
     }
 
-    @GetMapping(value = "/{username}")
-    public ResponseEntity<CustomerDto> getUser(@PathVariable("username") Long customerId) {
+//    @PostMapping(value = "/create")
+//    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
+//        customerService.saveCustomer(customerDto.toCustomer());
+//        return CustomerDto.fromCustomer(customerDto);
+//    }
 
-        CustomerDto optionalUser = customerService.getCustomer(customerId);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable("id") Long customerId) {
 
-        return ResponseEntity.ok().body(optionalUser);
+        CustomerDto optionalCustomer = customerService.getCustomer(customerId);
+
+        return ResponseEntity.ok().body(optionalCustomer);
     }
 
     @PutMapping("/{id}")
     public CustomerDto updateCustomer(@PathVariable("id") Long customerId,
-                                  @RequestBody Customer customer) {
+                                      @RequestBody Customer customer) {
         customerService.updateCustomer(customerId, customer);
 
         return CustomerDto.fromCustomer(customer);

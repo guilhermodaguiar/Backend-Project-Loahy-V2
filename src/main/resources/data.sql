@@ -1,9 +1,9 @@
-INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_stad.jpg', 'image/jpeg', 'http://localhost:8080/images/download/Brikkon_stad.jpg');
+INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_stad.jpg', 'image/jpg', 'http://localhost:8080/images/download/Brikkon_stad.jpg');
 INSERT INTO image (file_name, content_type, url) VALUES ('Clementoni_Frame_Me_Up_Tokyo.jpg', 'image/jpeg', 'http://localhost:8080/images/download/Clementoni_Frame_Me_Up_Tokyo.jpg');
-INSERT INTO image (file_name, content_type, url) VALUES ('Clementoni_Vintage.jpg', 'image/jpeg', 'http://localhost:8080/images/download/Clementoni_Vintage.jpg');
-INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_huis.jpg', 'image/jpeg', 'http://localhost:8080/images/download/Brikkon_huis.jpg');
+INSERT INTO image (file_name, content_type, url) VALUES ('Clementoni_Vintage.jpg', 'image/jpg', 'http://localhost:8080/images/download/Clementoni_Vintage.jpg');
+INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_huis.jpg', 'image/jpg', 'http://localhost:8080/images/download/Brikkon_huis.jpg');
 INSERT INTO image (file_name, content_type, url) VALUES ('superpetit_castle.jpeg', 'image/jpeg', 'http://localhost:8080/images/download/superpetit_castle.jpeg');
-INSERT INTO image (file_name, content_type, url) VALUES ('clementoni_Frame_Me_Up_Foosball.jpg', 'image/jpeg', 'http://localhost:8080/images/download/clementoni_Frame_Me_Up_Foosball.jpg');
+INSERT INTO image (file_name, content_type, url) VALUES ('clementoni_Frame_Me_Up_Foosball.jpg', 'image/jpg', 'http://localhost:8080/images/download/clementoni_Frame_Me_Up_Foosball.jpg');
 
 INSERT INTO orders (order_id, order_date) VALUES (1, '2021-02-02');
 INSERT INTO orders (order_id, order_date) VALUES (2, '2021-02-02');
@@ -43,12 +43,18 @@ INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1000
 INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1002);
 INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1005);
 
-INSERT INTO users (user_id, user_email, password) VALUES (2001, 'user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi');
-INSERT INTO users (user_id, user_email, password) VALUES (2002, 'admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG');
-INSERT INTO users (user_id, user_email, password) VALUES (2003, 'jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu');
-INSERT INTO users (user_id, user_email, password) VALUES (2004, 'Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW');
+
+INSERT INTO users (user_email, password) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi');
+INSERT INTO users (user_email, password) VALUES ('admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG');
+INSERT INTO users (user_email, password) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu');
+INSERT INTO users (user_email, password) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW');
 
 INSERT INTO authorities (user_email, authority) VALUES ('user@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('jenfromlombok@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('admin@test.nl', 'ROLE_ADMIN');
 INSERT INTO authorities (user_email, authority) VALUES ('guilfromlombok@test.nl', 'ROLE_USER');
+
+-- INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_add_number, customer_city, customer_zipcode, customer_phone) VALUES (5001, "Pablo", "Test", "Teststraat", "20", "bis", "4321AB", 630399190)
+
+-- INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_add_number, customer_city, customer_zipcode, customer_phone) VALUES (5002)
+-- INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_add_number, customer_city, customer_zipcode, customer_phone) VALUES (5003)

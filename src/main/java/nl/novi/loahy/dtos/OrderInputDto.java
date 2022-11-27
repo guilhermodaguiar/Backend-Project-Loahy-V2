@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class OrderInputDto {
     private LocalDate orderDate;
-    private Long userId;
     private String userName;
     private String userAdres;
     private String userEmail;
@@ -24,13 +23,6 @@ public class OrderInputDto {
         this.orderDate = orderDate;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getUserName() {
         return userName;
