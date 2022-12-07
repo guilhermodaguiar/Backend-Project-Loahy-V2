@@ -2,10 +2,10 @@ package nl.novi.loahy.services;
 
 
 import nl.novi.loahy.dtos.UserDto;
-import nl.novi.loahy.exceptions.CustomerNotFoundException;
 import nl.novi.loahy.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy.models.Authority;
+import nl.novi.loahy.models.Customer;
 import nl.novi.loahy.models.User;
 import nl.novi.loahy.repositories.CustomerRepository;
 import nl.novi.loahy.repositories.UserRepository;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 @Service
@@ -25,13 +24,17 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final CustomerRepository customerRepository;
+
     private final PasswordEncoder passwordEncoder;
 
+    private final CustomerService customerService;
+
     @Autowired
-    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder, CustomerService customerService) {
         this.userRepository = userRepository;
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
+        this.customerService = customerService;
     }
 
     public List<UserDto> getAllUsers() {
@@ -75,7 +78,6 @@ public class UserService {
         if (!userRepository.existsById(userEmail)) throw new UserEmailNotFoundException(userEmail);
         User user = userRepository.findById(userEmail).get();
         user.setUserPassword(passwordEncoder.encode(newUser.password));
-        user.setUserEmail(newUser.getUserEmail());
         userRepository.save(user);
     }
 
@@ -103,28 +105,12 @@ public class UserService {
         return userDto;
     }
 
-
-    public void assignCustomerToUser(String userEmail, Long customerId) {
-        var optionalUser = userRepository.findById(userEmail);
-        var optionalCustomer = customerRepository.findById(customerId);
-
-        if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
-            var user = optionalUser.get();
-            var customer = optionalCustomer.get();
-            user.setCustomer(customer);
-            userRepository.save(user);
-        } else {
-            throw new CustomerNotFoundException(customerId);
-        }
-    }
-
     public User toUser(UserDto userDto) {
 
         var user = new User();
 
         user.setUserPassword(userDto.getUserPassword());
         user.setUserEmail(userDto.getUserEmail());
-
         return user;
     }
 
@@ -139,4 +125,16 @@ public class UserService {
     }
 
 
+    public void assignCustomerToUser(String userEmail, Long customerId) {
+        Optional<User> optionalUser = userRepository.findById(userEmail);
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+
+        if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
+            var user = optionalUser.get();
+            var customer = optionalCustomer.get();
+
+            user.setCustomer(customer);
+            userRepository.save(user);
+        }
+    }
 }

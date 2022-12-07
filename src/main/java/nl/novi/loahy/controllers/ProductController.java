@@ -19,6 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
+
+
     private final ProductService productService;
     private final ImageController imageController;
 
@@ -57,7 +59,7 @@ public class ProductController {
         return ResponseEntity.created(null).body(productDto);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<Object> updateProduct (@PathVariable("id") Integer productId, @RequestBody ProductInputDto inputDto) {
 
        ProductDto productDto = productService.updateProduct(productId, inputDto);
@@ -65,7 +67,7 @@ public class ProductController {
        return ResponseEntity.ok().body(productDto);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable("id") Integer productId) {
 
         productService.deleteProduct(productId);

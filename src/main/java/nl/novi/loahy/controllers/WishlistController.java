@@ -42,7 +42,7 @@ public class WishlistController {
 //        return ResponseEntity.ok().body(wishlistDto);
 //    }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/save")
     public WishlistDto addWishlist(@RequestBody WishlistDto dto) {
         WishlistDto dto1 = wishlistService.addWishlist(dto);
         return dto1;

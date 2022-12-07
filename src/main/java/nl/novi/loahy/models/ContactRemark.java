@@ -9,19 +9,19 @@ import javax.validation.constraints.Email;
 @Entity
 @Table(name = "remarks")
 public class ContactRemark {
-
     @Id
-    @Column
-    private String contactName;
     @Column
     @Email
     private String contactEmail;
+    @Column
+    private String contactName;
+
     @Column
     private Long contactPhone;
     @Column
     private String contactOrganisation;
     @Column(columnDefinition = "TEXT")
-    private String remark;
+    private String contactRemark;
 
 
     public String getContactName() {
@@ -56,11 +56,11 @@ public class ContactRemark {
         this.contactOrganisation = contactOrganisation;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getContactRemark() {
+        return contactRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setContactRemark(String contactRemark) {
+        this.contactRemark = contactRemark;
     }
 }

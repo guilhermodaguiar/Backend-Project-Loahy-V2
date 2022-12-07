@@ -61,16 +61,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/contact-remarks/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/contact-remarks/**").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/images/download/").permitAll()
-                .antMatchers(HttpMethod.GET,"images/download/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"images/download/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"images/upload").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/products").permitAll()
                 .antMatchers(HttpMethod.GET, "/products/{productId}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/products/delete/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/products/{id}/picture").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/products/{id}/picture").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/{productId}").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/shopping-carts/all").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/shopping-carts/create").permitAll()
@@ -87,7 +85,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/orders/delete/{id}").hasRole("ADMIN")
 
 
-                .antMatchers(HttpMethod.GET, "/products/image-download/{fileName").permitAll()
                 .antMatchers(HttpMethod.POST, "/products/image-upload").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/products/image-delete").hasRole("ADMIN")
 

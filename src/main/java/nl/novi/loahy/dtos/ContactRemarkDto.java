@@ -6,7 +6,7 @@ public class ContactRemarkDto {
     public String contactEmail;
     public Long contactPhone;
     public String contactOrganisation;
-    public String remark;
+    public String contactRemark;
 
 
 
@@ -42,11 +42,11 @@ public class ContactRemarkDto {
         this.contactOrganisation = contactOrganisation;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getContactRemark() {
+        return contactRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setContactRemark(String contactRemark) {
+        this.contactRemark = contactRemark;
     }
 }

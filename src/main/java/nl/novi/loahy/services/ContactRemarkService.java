@@ -32,14 +32,14 @@ public class ContactRemarkService {
     }
 
 
-    public ContactRemarkDto getContactByName(String contactName) {
+    public ContactRemarkDto getContactByEmail(String contactEmail) {
         new ContactRemarkDto();
         ContactRemarkDto contactRemarkDto;
-        Optional<ContactRemark> contact = contactRemarkRepository.findById(contactName);
+        Optional<ContactRemark> contact = contactRemarkRepository.findById(contactEmail);
         if (contact.isPresent()) {
             contactRemarkDto = fromContact(contact.get());
         } else {
-            throw new ContactNotFoundException(contactName);
+            throw new ContactNotFoundException(contactEmail);
         }
         return contactRemarkDto;
     }
@@ -51,8 +51,8 @@ public class ContactRemarkService {
     }
 
 
-    public void deleteContact(String contactName) {
-        contactRemarkRepository.deleteById(contactName);
+    public void deleteContact(String contactEmail) {
+        contactRemarkRepository.deleteById(contactEmail);
     }
 
 
@@ -64,7 +64,7 @@ public class ContactRemarkService {
         contactDto.contactEmail = contactRemark.getContactEmail();
         contactDto.contactOrganisation = contactRemark.getContactOrganisation();
         contactDto.contactPhone = contactRemark.getContactPhone();
-        contactDto.remark = contactRemark.getRemark();
+        contactDto.contactRemark = contactRemark.getContactRemark();
 
         return contactDto;
     }
@@ -77,7 +77,7 @@ public class ContactRemarkService {
         contact.setContactPhone(contactRemarkDto.getContactPhone());
         contact.setContactEmail(contactRemarkDto.getContactEmail());
         contact.setContactOrganisation(contactRemarkDto.getContactOrganisation());
-        contact.setRemark(contactRemarkDto.getRemark());
+        contact.setContactRemark(contactRemarkDto.getContactRemark());
 
         return contact;
     }

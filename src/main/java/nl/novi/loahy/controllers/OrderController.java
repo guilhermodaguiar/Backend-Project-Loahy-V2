@@ -22,7 +22,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping(value = "all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<OrderDto>> getAllOrders() {
         List<OrderDto> orderDtos = orderService.getAllOrders();
 
@@ -38,7 +38,7 @@ public class OrderController {
     }
 
 
-    @PostMapping(value = "create")
+    @PostMapping(value = "/create")
     public ResponseEntity<OrderDto> addOrder(@RequestBody OrderInputDto orderInputDto) {
 
         OrderDto orderDto = orderService.addOrder(orderInputDto);

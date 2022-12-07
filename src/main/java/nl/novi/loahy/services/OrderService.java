@@ -77,10 +77,10 @@ public class OrderService {
     }
     
     public OrderDto addOrder(OrderInputDto orderInputDto) {
-        Order or = transferToOrder(orderInputDto);
-        orderRepository.save(or);
+        Order order = transferToOrder(orderInputDto);
+        orderRepository.save(order);
         
-        return transferToDto(or);
+        return transferToDto(order);
     }
     
     public void deleteOrder(Integer orderId) {

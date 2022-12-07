@@ -2,8 +2,10 @@ package nl.novi.loahy.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -27,6 +29,7 @@ public class Product {
     private String productName;
     @Column(name = "product_description",
             columnDefinition = "TEXT")
+    @Size(max = 150)
     private String productDescription;
     @Column(name = "product_price")
     private Double productPrice;
@@ -50,11 +53,11 @@ public class Product {
     public Product(
             Integer productId,
             String productName,
-            String productInformation,
+            String productDescription,
             Double productPrice, FileUploadResponse image) {
         this.productId = productId;
         this.productName = productName;
-        this.productDescription = productInformation;
+        this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.image = image;
     }
@@ -84,8 +87,8 @@ public class Product {
         return productDescription;
     }
 
-    public void setProductDescription(String productInformation) {
-        this.productDescription = productInformation;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public Double getProductPrice() {

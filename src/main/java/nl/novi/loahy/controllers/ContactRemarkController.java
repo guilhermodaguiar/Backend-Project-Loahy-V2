@@ -23,7 +23,7 @@ public class ContactRemarkController {
         this.contactRemarkService = contactRemarkService;
     }
 
-    @GetMapping()
+    @GetMapping(value = "/all")
     public ResponseEntity<List<ContactRemarkDto>> getAllContacts() {
 
         List<ContactRemarkDto> contactRemarkDtos = contactRemarkService.getAllContacts();
@@ -31,17 +31,17 @@ public class ContactRemarkController {
         return ResponseEntity.ok().body(contactRemarkDtos);
     }
 
-    @GetMapping(value = "/{contactName}")
-    public ResponseEntity<ContactRemarkDto> getContact(@PathVariable("contactName") String contactName) {
+    @GetMapping(value = "/{contactEmail}")
+    public ResponseEntity<ContactRemarkDto> getContact(@PathVariable("contactEmail") String contactEmail) {
 
-        ContactRemarkDto optionalContact = contactRemarkService.getContactByName(contactName);
+        ContactRemarkDto optionalContact = contactRemarkService.getContactByEmail(contactEmail);
 
 
         return ResponseEntity.ok().body(optionalContact);
 
     }
 
-    @PostMapping(value = "/post")
+    @PostMapping(value = "/create")
     public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody ContactRemarkDto contactRemarkDto) {
 
         final String createdContact = contactRemarkService.createRemark(contactRemarkDto);
@@ -53,9 +53,9 @@ public class ContactRemarkController {
     }
 
 
-    @DeleteMapping(value = "/{contactName}")
-    public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("contactName") String contactName) {
-        contactRemarkService.deleteContact(contactName);
+    @DeleteMapping(value = "/delete/{contact_email}")
+    public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("contact_email") String contactEmail) {
+        contactRemarkService.deleteContact(contactEmail);
         return ResponseEntity.noContent().build();
     }
 

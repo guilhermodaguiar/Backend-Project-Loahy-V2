@@ -1,24 +1,20 @@
 package nl.novi.loahy.controllers;
 
-
 import nl.novi.loahy.dtos.UserDto;
-import nl.novi.loahy.exceptions.BadRequestException;
 import nl.novi.loahy.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
 
-    @Autowired
+
     private final UserService userService;
 
 
@@ -71,9 +67,9 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{user_email}/{customer_id}")
+    @PutMapping("/{user_email}/{customerId}")
     public void assignCustomerToUser(@PathVariable("user_email") String userEmail,
-                                     @PathVariable("customer_id") Long customerId) {
+                                   @PathVariable("customerId") Long customerId) {
 
         userService.assignCustomerToUser(userEmail, customerId);
 
