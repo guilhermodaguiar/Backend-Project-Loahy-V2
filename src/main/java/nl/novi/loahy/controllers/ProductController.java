@@ -27,7 +27,8 @@ public class ProductController {
     private final WishlistProductService wishlistProductService;
 
     @Autowired
-    public ProductController(ProductService productService, ImageController imageController, WishlistProductService wishlistProductService) {
+    public ProductController(ProductService productService, ImageController imageController,
+                             WishlistProductService wishlistProductService) {
         this.productService = productService;
         this.imageController = imageController;
         this.wishlistProductService = wishlistProductService;
@@ -60,7 +61,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<Object> updateProduct (@PathVariable("id") Integer productId, @RequestBody ProductInputDto inputDto) {
+    public ResponseEntity<Object> updateProduct (@PathVariable("id") Integer productId,
+                                                 @RequestBody ProductInputDto inputDto) {
 
        ProductDto productDto = productService.updateProduct(productId, inputDto);
 

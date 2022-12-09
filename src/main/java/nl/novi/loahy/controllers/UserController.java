@@ -1,5 +1,7 @@
 package nl.novi.loahy.controllers;
 
+import nl.novi.loahy.dtos.CustomerDto;
+import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.dtos.UserDto;
 import nl.novi.loahy.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,12 @@ public class UserController {
 
     private final UserService userService;
 
+    private final CustomerController customerController;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService, CustomerController customerController) {
         this.userService = userService;
+        this.customerController = customerController;
     }
 
     @GetMapping(value = "/all")
@@ -71,7 +76,17 @@ public class UserController {
     public void assignCustomerToUser(@PathVariable("user_email") String userEmail,
                                    @PathVariable("customerId") Long customerId) {
 
-        userService.assignCustomerToUser(userEmail, customerId);
+        userService.assignCustomerToUser(customerId, userEmail);
 
+    }
+
+    @PostMapping("/{user_email}/customer")
+    public void registerCustomerToUser(@PathVariable("user_email") String userEmail,
+                                     @RequestBody CustomerInputDto inputDto) {
+
+        CustomerInputDto customerData = customerController.createCustomer(inputDto);
+
+
+        userService.registerCustomerToUser(customerData.getCustomerId(), userEmail);
     }
 }

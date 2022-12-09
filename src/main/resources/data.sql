@@ -5,10 +5,10 @@ INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_huis.jpg', 'im
 INSERT INTO image (file_name, content_type, url) VALUES ('superpetit_castle.jpeg', 'image/jpeg', 'http://localhost:8080/images/download/superpetit_castle.jpeg');
 INSERT INTO image (file_name, content_type, url) VALUES ('clementoni_Frame_Me_Up_Foosball.jpg', 'image/jpg', 'http://localhost:8080/images/download/clementoni_Frame_Me_Up_Foosball.jpg');
 
-INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5001, 'User', 'Test', 'Userstraat', '45', 'bis', 'Amsterdam', '1234AB', 0644355490);
-INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5002, 'Admin', 'Test', 'Userstraat', '54', 'A', 'Amsterdam', '2222AZ', 0644355490);
-INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5003, 'Jen', 'van Lombok', 'Lombokstraat', '400', 'bis', 'Utrecht', '1453PX', 0644355490);
-INSERT INTO customers (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5004, 'Guil', 'Dag', 'Balitraat', '200', 'bis', 'Utrecht', '1244DD', 0644355490);
+INSERT INTO customer (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5001, 'User', 'Test', 'Userstraat', '45', 'bis', 'Amsterdam', '1234AB', 0644355490);
+INSERT INTO customer (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5002, 'Admin', 'Test', 'Userstraat', '54', 'A', 'Amsterdam', '2222AZ', 0644355490);
+INSERT INTO customer (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5003, 'Jen', 'van Lombok', 'Lombokstraat', '400', 'bis', 'Utrecht', '1453PX', 0644355490);
+INSERT INTO customer (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5004, 'Guil', 'Dag', 'Balitraat', '200', 'bis', 'Utrecht', '1244DD', 0644355490);
 
 
 INSERT INTO orders (order_id, order_date) VALUES (1, '2021-02-02');
@@ -48,7 +48,7 @@ INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1002
 INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1005);
 
 
-INSERT INTO users (user_email, password) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi');
+INSERT INTO users (user_email, password, customer_customer_id) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi', 5001);
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG', 5002);
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 5003);
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW', 5004);

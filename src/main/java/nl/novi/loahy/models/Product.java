@@ -34,7 +34,6 @@ public class Product {
     @Column(name = "product_price")
     private Double productPrice;
 
-
     @OneToOne
     FileUploadResponse image;
 

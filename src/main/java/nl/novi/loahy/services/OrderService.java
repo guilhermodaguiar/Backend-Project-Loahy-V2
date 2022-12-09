@@ -4,7 +4,6 @@ package nl.novi.loahy.services;
 import nl.novi.loahy.dtos.OrderDto;
 import nl.novi.loahy.dtos.OrderInputDto;
 import nl.novi.loahy.dtos.ProductDto;
-import nl.novi.loahy.dtos.ProductInputDto;
 import nl.novi.loahy.exceptions.OrderNotFoundException;
 import nl.novi.loahy.models.Order;
 import nl.novi.loahy.models.Product;
@@ -12,8 +11,6 @@ import nl.novi.loahy.repositories.OrderRepository;
 import nl.novi.loahy.repositories.ProductRepository;
 import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.stereotype.Service;
-
-import static nl.novi.loahy.dtos.ProductDto.transferToDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +24,14 @@ public class OrderService {
     private final UserService userService;
 
     private final ProductRepository productRepository;
-    private final ProductService productService;
 
 
-    public OrderService(OrderRepository orderRepository, UserRepository userRepository, UserService userService, ProductRepository productRepository, ProductService productService) {
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository,
+                        UserService userService, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.userService = userService;
         this.productRepository = productRepository;
-        this.productService = productService;
     }
 
     public List<OrderDto> getAllOrders() {

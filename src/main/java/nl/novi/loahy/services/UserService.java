@@ -1,12 +1,12 @@
 package nl.novi.loahy.services;
 
 
+import nl.novi.loahy.dtos.CustomerDto;
+import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.dtos.UserDto;
 import nl.novi.loahy.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy.exceptions.UserEmailNotFoundException;
-import nl.novi.loahy.models.Authority;
-import nl.novi.loahy.models.Customer;
-import nl.novi.loahy.models.User;
+import nl.novi.loahy.models.*;
 import nl.novi.loahy.repositories.CustomerRepository;
 import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import static nl.novi.loahy.dtos.UserDto.fromUser;
 
 
 @Service
@@ -27,14 +30,12 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final CustomerService customerService;
 
     @Autowired
-    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder, CustomerService customerService) {
+    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
-        this.customerService = customerService;
     }
 
     public List<UserDto> getAllUsers() {
@@ -94,16 +95,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public static UserDto fromUser(User user){
-
-        var userDto = new UserDto();
-
-        userDto.userEmail = user.getUserEmail();
-        userDto.password = user.getUserPassword();
-        userDto.authorities = user.getAuthorities();
-
-        return userDto;
-    }
 
     public User toUser(UserDto userDto) {
 
@@ -114,7 +105,7 @@ public class UserService {
         return user;
     }
 
-    public UserDto transferToDto(User user){
+    public UserDto transferToDto(User user) {
 
         var userDto = new UserDto();
 
@@ -125,16 +116,33 @@ public class UserService {
     }
 
 
-    public void assignCustomerToUser(String userEmail, Long customerId) {
+    public void assignCustomerToUser(Long customerId, String userEmail) {
+
         Optional<User> optionalUser = userRepository.findById(userEmail);
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
 
         if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
-            var user = optionalUser.get();
-            var customer = optionalCustomer.get();
+            User user = optionalUser.get();
+            Customer customer = optionalCustomer.get();
 
             user.setCustomer(customer);
             userRepository.save(user);
+        }
+    }
+
+    public void registerCustomerToUser(Long customerId, String userEmail) {
+
+        Optional<User>optionalUser = userRepository.findUserByUserEmailIs(userEmail);
+        Optional<CustomerInputDto> optionalCustomer = customerRepository.findByCustomerId(customerId);
+
+        if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            CustomerInputDto customer = optionalCustomer.get();
+
+            user.setCustomer(customer.toCustomer());
+            userRepository.save(user);
+        } else {
+            throw new UserEmailNotFoundException(userEmail);
         }
     }
 }

@@ -29,7 +29,8 @@ public class ImageController {
     @PostMapping("/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
 
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/download/")
+                .path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
         String contentType = file.getContentType();
 
