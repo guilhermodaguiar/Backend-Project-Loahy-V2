@@ -3,6 +3,7 @@ package nl.novi.loahy.controllers;
 import nl.novi.loahy.dtos.CustomerDto;
 import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.dtos.UserDto;
+import nl.novi.loahy.models.Customer;
 import nl.novi.loahy.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -82,11 +84,12 @@ public class UserController {
 
     @PostMapping("/{user_email}/customer")
     public void registerCustomerToUser(@PathVariable("user_email") String userEmail,
-                                     @RequestBody CustomerInputDto inputDto) {
+                                     @RequestBody CustomerDto Dto) {
 
-        CustomerInputDto customerData = customerController.createCustomer(inputDto);
+        ResponseEntity <CustomerDto> customerData = customerController.createCustomer(Dto);
 
 
-        userService.registerCustomerToUser(customerData.getCustomerId(), userEmail);
+        assert customerData != null;
+        userService.registerCustomerToUser(Objects.requireNonNull(customerData.getBody()).getCustomerId(), userEmail);
     }
 }

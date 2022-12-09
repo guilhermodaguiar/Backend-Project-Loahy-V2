@@ -34,6 +34,20 @@ public class User {
     ShoppingCart shoppingCart;
 
 
+    public User(String userEmail, String password, Customer customer, Set<Authority> authorities,
+                Wishlist wishlist, ShoppingCart shoppingCart) {
+        this.userEmail = userEmail;
+        this.password = password;
+        this.customer = customer;
+        this.authorities = authorities;
+        this.wishlist = wishlist;
+        this.shoppingCart = shoppingCart;
+    }
+
+    public User() {
+
+    }
+
     public String getUserEmail() {
         return userEmail;
     }

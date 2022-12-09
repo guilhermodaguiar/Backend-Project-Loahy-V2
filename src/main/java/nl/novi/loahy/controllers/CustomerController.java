@@ -30,14 +30,6 @@ public class CustomerController {
     }
 
 
-    @PostMapping(value = "/create")
-    public CustomerInputDto createCustomer(@RequestBody CustomerInputDto inputDto) {
-        CustomerDto customerDto = customerService.createCustomer(inputDto);
-
-        return customerDto;
-    }
-
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable("id") Long customerId) {
 
@@ -47,6 +39,13 @@ public class CustomerController {
         return ResponseEntity.ok().body(optionalCustomer);
     }
 
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto Dto) {
+        CustomerDto customerDto1 = customerService.createCustomer(Dto);
+
+        return ResponseEntity.created(null).body(customerDto1);
+    }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Object> updateCustomer(@PathVariable("id") Long customerId,

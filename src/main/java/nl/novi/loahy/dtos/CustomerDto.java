@@ -1,7 +1,7 @@
 package nl.novi.loahy.dtos;
 import nl.novi.loahy.models.Customer;
 
-public class CustomerDto extends CustomerInputDto {
+public class CustomerDto {
 
     public Long customerId;
     public String customerFirstName;
@@ -12,7 +12,7 @@ public class CustomerDto extends CustomerInputDto {
     public String customerCity;
     public String customerZipcode;
     public Long customerPhone;
-    public CustomerDto toCustomers;
+
 
 
     public static CustomerDto transferToCustomerDto(Customer customer) {

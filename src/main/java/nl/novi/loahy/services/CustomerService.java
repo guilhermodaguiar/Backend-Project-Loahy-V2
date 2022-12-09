@@ -34,9 +34,9 @@ public class CustomerService {
     }
 
 
-    public CustomerDto createCustomer(CustomerInputDto inputDto) {
+    public CustomerDto createCustomer(CustomerDto Dto) {
 
-        Customer newCustomer = transferToCustomer(inputDto);
+        Customer newCustomer = transferToCustomer(Dto);
 
         customerRepository.save(newCustomer);
 
@@ -65,7 +65,7 @@ public class CustomerService {
 
             Customer customer = customerRepository.findById(customerId).get();
 
-            Customer customer1 = transferToCustomer(inputDto);
+            Customer customer1 = transferToCustomer2(inputDto);
             customer1.setCustomerId(customer.getCustomerId());
 
             customerRepository.save(customer1);
@@ -76,20 +76,36 @@ public class CustomerService {
         }
     }
 
-    public  Customer transferToCustomer(CustomerInputDto productDto) {
+    public Customer transferToCustomer(CustomerDto Dto) {
 
         var customer = new Customer();
 
-        customer.setCustomerFirstName(productDto.getCustomerFirstName());
-        customer.setCustomerLastName(productDto.getCustomerLastName());
-        customer.setCustomerHouseNumber(productDto.getCustomerHouseNumber());
-        customer.setCustomerHouseNumberAddition(productDto.getCustomerHouseNumberAddition());
-        customer.setCustomerZipcode(productDto.getCustomerZipcode());
-        customer.setCustomerCity(productDto.getCustomerCity());
-        customer.setCustomerCity(productDto.getCustomerCity());
-        customer.setCustomerPhone(productDto.getCustomerPhone());
+        customer.setCustomerFirstName(Dto.getCustomerFirstName());
+        customer.setCustomerLastName(Dto.getCustomerLastName());
+        customer.setCustomerStreetName(Dto.getCustomerStreetName());
+        customer.setCustomerHouseNumber(Dto.getCustomerHouseNumber());
+        customer.setCustomerHouseNumberAddition(Dto.getCustomerHouseNumberAddition());
+        customer.setCustomerZipcode(Dto.getCustomerZipcode());
+        customer.setCustomerCity(Dto.getCustomerCity());
+        customer.setCustomerPhone(Dto.getCustomerPhone());
         return customer;
     }
+
+    public Customer transferToCustomer2(CustomerInputDto Dto) {
+
+        var customer = new Customer();
+
+        customer.setCustomerFirstName(Dto.getCustomerFirstName());
+        customer.setCustomerLastName(Dto.getCustomerLastName());
+        customer.setCustomerStreetName(Dto.getCustomerStreetName());
+        customer.setCustomerHouseNumber(Dto.getCustomerHouseNumber());
+        customer.setCustomerHouseNumberAddition(Dto.getCustomerHouseNumberAddition());
+        customer.setCustomerZipcode(Dto.getCustomerZipcode());
+        customer.setCustomerCity(Dto.getCustomerCity());
+        customer.setCustomerPhone(Dto.getCustomerPhone());
+        return customer;
+    }
+
 
 
 }

@@ -77,6 +77,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+
     @PostMapping(value = "/{id}/image")
     public void assignImageToProduct(@PathVariable("id") Integer productId,
                                      @RequestBody MultipartFile file) {

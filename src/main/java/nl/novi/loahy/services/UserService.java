@@ -6,7 +6,9 @@ import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.dtos.UserDto;
 import nl.novi.loahy.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy.exceptions.UserEmailNotFoundException;
-import nl.novi.loahy.models.*;
+import nl.novi.loahy.models.Authority;
+import nl.novi.loahy.models.Customer;
+import nl.novi.loahy.models.User;
 import nl.novi.loahy.repositories.CustomerRepository;
 import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static nl.novi.loahy.dtos.UserDto.fromUser;
@@ -71,6 +72,7 @@ public class UserService {
         }
         User newUser = userRepository.save(toUser(userDto));
         newUser.setUserPassword(passwordEncoder.encode(userDto.password));
+
         userRepository.save(newUser);
         return newUser.getUserEmail();
     }
@@ -133,13 +135,13 @@ public class UserService {
     public void registerCustomerToUser(Long customerId, String userEmail) {
 
         Optional<User>optionalUser = userRepository.findUserByUserEmailIs(userEmail);
-        Optional<CustomerInputDto> optionalCustomer = customerRepository.findByCustomerId(customerId);
+        Optional<Customer> optionalCustomer = customerRepository.findByCustomerId(customerId);
 
         if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
             User user = optionalUser.get();
-            CustomerInputDto customer = optionalCustomer.get();
+            Customer customer = optionalCustomer.get();
 
-            user.setCustomer(customer.toCustomer());
+            user.setCustomer(customer);
             userRepository.save(user);
         } else {
             throw new UserEmailNotFoundException(userEmail);

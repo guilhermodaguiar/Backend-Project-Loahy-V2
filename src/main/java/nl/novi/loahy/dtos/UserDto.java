@@ -6,7 +6,6 @@ import nl.novi.loahy.models.Authority;
 import nl.novi.loahy.models.Customer;
 import nl.novi.loahy.models.User;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -83,5 +82,11 @@ public class UserDto {
         this.password = password;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
