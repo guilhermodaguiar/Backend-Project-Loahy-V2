@@ -30,18 +30,14 @@ public class User {
     @OneToOne
     Wishlist wishlist;
 
-    @OneToOne
-    ShoppingCart shoppingCart;
-
 
     public User(String userEmail, String password, Customer customer, Set<Authority> authorities,
-                Wishlist wishlist, ShoppingCart shoppingCart) {
+                Wishlist wishlist) {
         this.userEmail = userEmail;
         this.password = password;
         this.customer = customer;
         this.authorities = authorities;
         this.wishlist = wishlist;
-        this.shoppingCart = shoppingCart;
     }
 
     public User() {
@@ -90,13 +86,6 @@ public class User {
         this.wishlist = wishlist;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
 
     public String getPassword() {
         return password;

@@ -45,9 +45,6 @@ public class Product {
     @JsonIgnore
     List<WishlistProduct> wishlistProducts;
 
-    @OneToMany(mappedBy = "shoppingCart")
-    @JsonIgnore
-    List<ShoppingCartProduct> shoppingCartProducts;
 
     public Product(
             Integer productId,
@@ -121,14 +118,6 @@ public class Product {
 
     public void setWishlistProducts(List<WishlistProduct> wishlistProducts) {
         this.wishlistProducts = wishlistProducts;
-    }
-
-    public List<ShoppingCartProduct> getShoppingCartProducts() {
-        return shoppingCartProducts;
-    }
-
-    public void setShoppingCartProducts(List<ShoppingCartProduct> shoppingCartProducts) {
-        this.shoppingCartProducts = shoppingCartProducts;
     }
 }
 

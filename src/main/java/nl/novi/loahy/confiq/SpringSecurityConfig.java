@@ -70,11 +70,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/products/{id}/picture").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/products/{id}/picture").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/shopping-carts/all").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/shopping-carts/create").permitAll()
-                .antMatchers(HttpMethod.PUT, "/shopping-carts/{id}").permitAll()
-                .antMatchers(HttpMethod.DELETE, "shopping-carts/{id}").permitAll()
-                .antMatchers(HttpMethod.GET,"/shopping-carts/{id}").permitAll()
 
                 .antMatchers(HttpMethod.GET, "/orders/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/orders/{id}").permitAll()

@@ -19,9 +19,6 @@ INSERT INTO orders (order_id, order_date) VALUES (4, '2022-07-02');
 INSERT INTO wishlists(wishlist_id) VALUES (200);
 INSERT INTO wishlists(wishlist_id) VALUES (201);
 
-INSERT INTO shopping_carts(shopping_cart_id) VALUES (50);
-INSERT INTO shopping_carts(shopping_cart_id) VALUES (51);
-
 
 INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1000, 'Brikkon - Stad', 'Met de Brikkon World stad bouw je een prachtige stad van hout.', 64.95, 'Brikkon_stad.jpg');
 INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1001, 'Frame me up - Tokyo Lights', 'Puzzel de stad Tokyo en frame het op', 15.95, 'Clementoni_Frame_Me_Up_Tokyo.jpg');
@@ -39,13 +36,6 @@ INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (200, 1002);
 INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (200, 1003);
 INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1002);
 INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1005);
-
-
-INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (50, 1001);
-INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (50, 1002);
-INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (50, 1003);
-INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1002);
-INSERT INTO shopping_cart_product(shopping_cart_id, product_id) VALUES (51, 1005);
 
 
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi', 5001);

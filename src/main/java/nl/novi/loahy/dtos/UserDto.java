@@ -17,7 +17,7 @@ public class UserDto {
     @JsonSerialize
     public Customer customer;
     public WishlistDto wishlistDto;
-    public ShoppingCartDto shoppingCartDto;
+
     @JsonDeserialize
     public Set<Authority> authorities;
 
@@ -64,14 +64,6 @@ public class UserDto {
 
     public void setWishlistDto(WishlistDto wishlistDto) {
         this.wishlistDto = wishlistDto;
-    }
-
-    public ShoppingCartDto getShoppingCartDto() {
-        return shoppingCartDto;
-    }
-
-    public void setShoppingCartDto(ShoppingCartDto shoppingCartDto) {
-        this.shoppingCartDto = shoppingCartDto;
     }
 
     public String getPassword() {
