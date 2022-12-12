@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Map;
 
 @Entity
 @Table(name = "wishlists" )
@@ -19,15 +21,16 @@ public class Wishlist {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "wishlist_sequence"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "200"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "202"),
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
     @Column(nullable = false, unique = true)
     private Integer wishlistId;
 
-    @OneToOne(mappedBy = "wishlist")
-    User user;
+    @Column
+    private String wishlistName;
+
 
     @OneToMany(mappedBy = "wishlist")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -51,11 +54,12 @@ public class Wishlist {
         this.wishlistProducts = wishlistProducts;
     }
 
-    public User getUser() {
-        return user;
+
+    public String getWishlistName() {
+        return wishlistName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setWishlistName(String wishlistName) {
+        this.wishlistName = wishlistName;
     }
 }

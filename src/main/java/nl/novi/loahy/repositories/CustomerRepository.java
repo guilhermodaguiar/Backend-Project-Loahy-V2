@@ -1,7 +1,5 @@
 package nl.novi.loahy.repositories;
 
-import nl.novi.loahy.dtos.CustomerDto;
-import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 

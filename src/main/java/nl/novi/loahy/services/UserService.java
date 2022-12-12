@@ -1,16 +1,16 @@
 package nl.novi.loahy.services;
 
 
-import nl.novi.loahy.dtos.CustomerDto;
-import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.dtos.UserDto;
 import nl.novi.loahy.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy.models.Authority;
 import nl.novi.loahy.models.Customer;
 import nl.novi.loahy.models.User;
+import nl.novi.loahy.models.Wishlist;
 import nl.novi.loahy.repositories.CustomerRepository;
 import nl.novi.loahy.repositories.UserRepository;
+import nl.novi.loahy.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,12 +31,15 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final WishlistRepository wishlistRepository;
+
 
     @Autowired
-    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CustomerRepository customerRepository, PasswordEncoder passwordEncoder, WishlistRepository wishlistRepository) {
         this.userRepository = userRepository;
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
+        this.wishlistRepository = wishlistRepository;
     }
 
     public List<UserDto> getAllUsers() {
@@ -142,6 +145,22 @@ public class UserService {
             Customer customer = optionalCustomer.get();
 
             user.setCustomer(customer);
+            userRepository.save(user);
+        } else {
+            throw new UserEmailNotFoundException(userEmail);
+        }
+    }
+
+    public void addWishlistToUser(Integer wishlistId, String userEmail) {
+
+        Optional<User>optionalUser = userRepository.findUserByUserEmailIs(userEmail);
+        Optional<Wishlist> optionalWishlist = wishlistRepository.findByWishlistId(wishlistId);
+
+        if (optionalWishlist.isPresent() && optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Wishlist wishlist = optionalWishlist.get();
+
+            user.setWishlist(wishlist);
             userRepository.save(user);
         } else {
             throw new UserEmailNotFoundException(userEmail);

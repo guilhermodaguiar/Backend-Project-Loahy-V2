@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.novi.loahy.models.Authority;
 import nl.novi.loahy.models.Customer;
 import nl.novi.loahy.models.User;
+import nl.novi.loahy.models.Wishlist;
 
 import java.util.Set;
 
@@ -16,7 +17,9 @@ public class UserDto {
 
     @JsonSerialize
     public Customer customer;
-    public WishlistDto wishlistDto;
+
+    @JsonDeserialize
+    public Wishlist wishlist;
 
     @JsonDeserialize
     public Set<Authority> authorities;
@@ -29,6 +32,7 @@ public class UserDto {
         userDto.password = user.getUserPassword();
         userDto.authorities = user.getAuthorities();
         userDto.customer = (user.getCustomer());
+        userDto.wishlist = (user.getWishlist());
 
         return userDto;
     }
@@ -58,12 +62,12 @@ public class UserDto {
         this.userEmail = userEmail;
     }
 
-    public WishlistDto getWishlistDto() {
-        return wishlistDto;
+    public Wishlist getWishlist() {
+        return wishlist;
     }
 
-    public void setWishlistDto(WishlistDto wishlistDto) {
-        this.wishlistDto = wishlistDto;
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
     }
 
     public String getPassword() {

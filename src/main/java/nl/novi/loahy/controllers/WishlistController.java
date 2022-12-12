@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,27 +27,15 @@ public class WishlistController {
         this.wishlistProductService = wishlistProductService;
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<List<WishlistDto>> getAllWishlists() {
 
-        List<WishlistDto> wishlistDto = wishlistService.getAllWishlists();
 
-        return ResponseEntity.ok().body(wishlistDto);
+    @PostMapping(value = "/create")
+    public ResponseEntity<WishlistDto> createWishlist(@RequestBody WishlistDto dto) {
+        WishlistDto dto1 = wishlistService.createWishlist(dto);
+
+        return ResponseEntity.created(null).body((dto1));
     }
 
-//    @PostMapping(value = "")
-//    public ResponseEntity<Object> createWishlist(@RequestBody WishlistInputDto wishlistInputDto) {
-//
-//        WishlistDto wishlistDto = wishlistService.createWishlist(wishlistInputDto);
-//
-//        return ResponseEntity.ok().body(wishlistDto);
-//    }
-
-    @PostMapping(value = "/save")
-    public WishlistDto addWishlist(@RequestBody WishlistDto dto) {
-        WishlistDto dto1 = wishlistService.addWishlist(dto);
-        return dto1;
-    }
 
 
     @DeleteMapping(value = "/{id}")

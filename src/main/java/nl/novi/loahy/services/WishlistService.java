@@ -1,7 +1,10 @@
 package nl.novi.loahy.services;
 
+import nl.novi.loahy.dtos.ProductDto;
 import nl.novi.loahy.dtos.WishlistDto;
+import nl.novi.loahy.exceptions.ProductNotFoundException;
 import nl.novi.loahy.exceptions.WishlistNotFoundException;
+import nl.novi.loahy.models.Product;
 import nl.novi.loahy.models.Wishlist;
 import nl.novi.loahy.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static nl.novi.loahy.dtos.ProductDto.transferToDto;
+import static nl.novi.loahy.dtos.WishlistDto.transferToWishlistDto;
 
 @Service
 public class WishlistService {
@@ -21,21 +28,16 @@ public class WishlistService {
         this.wishlistRepository = wishlistRepository;
     }
 
-    public List<WishlistDto> getAllWishlists() {
-        List<WishlistDto> collection = new ArrayList<>();
-        List<Wishlist> list = wishlistRepository.findAll();
-        for (Wishlist wishlist : list) {
-            collection.add(transferToDto(wishlist));
-        }
-        return collection;
-    }
 
 
-    public WishlistDto addWishlist(WishlistDto wishlistDto) {
-        Wishlist wl =  transferToWishlist(wishlistDto);
-        wishlistRepository.save(wl);
-        return wishlistDto;
+    public WishlistDto createWishlist(WishlistDto wishlistDto) {
+
+
+        Wishlist newWishlist =  transferToWishlist(wishlistDto);
+        wishlistRepository.save(newWishlist);
+        return transferToWishlistDto(newWishlist);
     }
+
 
     public WishlistDto updateWishlist(Integer wishlistId, WishlistDto wishlistDto) {
         if (wishlistRepository.findById(wishlistId).isPresent()) {
@@ -43,11 +45,11 @@ public class WishlistService {
             Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
 
             Wishlist wishlist1 = transferToWishlist(wishlistDto);
-            wishlist1.setWishlistId(wishlist.getWishlistId());
+            wishlist1.setWishlistName(wishlist.getWishlistName());
 
             wishlistRepository.save(wishlist1);
 
-            return transferToDto(wishlist1);
+            return transferToWishlistDto(wishlist1);
         } else {
             throw new WishlistNotFoundException(wishlistId);
         }
@@ -59,20 +61,13 @@ public class WishlistService {
     }
 
 
-    public WishlistDto transferToDto(Wishlist wishlist) {
-        
-        var wishlistDto = new WishlistDto();
-        
-        wishlistDto.wishlistId = wishlist.getWishlistId();
-        
-        return wishlistDto;
-    }
 
-    public Wishlist transferToWishlist(WishlistDto wishlistDto) {
+    public Wishlist transferToWishlist(WishlistDto Dto) {
 
         var wishlist = new Wishlist();
 
-        wishlist.setWishlistId(wishlistDto.getWishlistId());
+        wishlist.setWishlistId(Dto.getWishlistId());
+        wishlist.setWishlistName(Dto.getWishlistName());
         return wishlist;
     }
 

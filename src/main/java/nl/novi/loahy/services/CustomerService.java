@@ -100,8 +100,8 @@ public class CustomerService {
         customer.setCustomerStreetName(Dto.getCustomerStreetName());
         customer.setCustomerHouseNumber(Dto.getCustomerHouseNumber());
         customer.setCustomerHouseNumberAddition(Dto.getCustomerHouseNumberAddition());
-        customer.setCustomerZipcode(Dto.getCustomerZipcode());
         customer.setCustomerCity(Dto.getCustomerCity());
+        customer.setCustomerZipcode(Dto.getCustomerZipcode());
         customer.setCustomerPhone(Dto.getCustomerPhone());
         return customer;
     }

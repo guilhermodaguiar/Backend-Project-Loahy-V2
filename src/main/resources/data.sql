@@ -16,8 +16,8 @@ INSERT INTO orders (order_id, order_date) VALUES (2, '2021-02-02');
 INSERT INTO orders (order_id, order_date) VALUES (3, '2021-02-02');
 INSERT INTO orders (order_id, order_date) VALUES (4, '2022-07-02');
 
-INSERT INTO wishlists(wishlist_id) VALUES (200);
-INSERT INTO wishlists(wishlist_id) VALUES (201);
+INSERT INTO wishlists(wishlist_id, wishlist_name) VALUES (200, 'Wishlist van User');
+INSERT INTO wishlists(wishlist_id, wishlist_name) VALUES (201, 'Mijn Hippe Wishlist');
 
 
 INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1000, 'Brikkon - Stad', 'Met de Brikkon World stad bouw je een prachtige stad van hout.', 64.95, 'Brikkon_stad.jpg');
@@ -38,9 +38,9 @@ INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1002);
 INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1005);
 
 
-INSERT INTO users (user_email, password, customer_customer_id) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi', 5001);
+INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi', 5001, 200);
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG', 5002);
-INSERT INTO users (user_email, password, customer_customer_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 5003);
+INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 5003, 201);
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW', 5004);
 
 INSERT INTO authorities (user_email, authority) VALUES ('user@test.nl', 'ROLE_USER');

@@ -57,6 +57,9 @@ public class WishlistProductService {
 
             productDto.setProductId(product.getProductId());
             productDto.setProductName(product.getProductName());
+            productDto.setProductInformation(product.getProductDescription());
+            productDto.setProductPrice(product.getProductPrice());
+            productDto.setImage(product.getImage());
 
             productDtos.add(productDto);
         }

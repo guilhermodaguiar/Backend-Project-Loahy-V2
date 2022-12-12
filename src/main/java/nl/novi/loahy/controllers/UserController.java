@@ -1,9 +1,8 @@
 package nl.novi.loahy.controllers;
 
 import nl.novi.loahy.dtos.CustomerDto;
-import nl.novi.loahy.dtos.CustomerInputDto;
 import nl.novi.loahy.dtos.UserDto;
-import nl.novi.loahy.models.Customer;
+import nl.novi.loahy.dtos.WishlistDto;
 import nl.novi.loahy.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +22,13 @@ public class UserController {
 
     private final CustomerController customerController;
 
+    private final WishlistController wishlistController;
 
-    public UserController(UserService userService, CustomerController customerController) {
+
+    public UserController(UserService userService, CustomerController customerController, WishlistController wishlistController) {
         this.userService = userService;
         this.customerController = customerController;
+        this.wishlistController = wishlistController;
     }
 
     @GetMapping(value = "/all")
@@ -88,8 +90,19 @@ public class UserController {
 
         ResponseEntity <CustomerDto> customerData = customerController.createCustomer(Dto);
 
-
         assert customerData != null;
         userService.registerCustomerToUser(Objects.requireNonNull(customerData.getBody()).getCustomerId(), userEmail);
     }
+
+    @PostMapping("/{user_email}/wishlist")
+    public void addWishlistToUser(@PathVariable("user_email") String userEmail,
+                                       @RequestBody WishlistDto Dto) {
+
+        ResponseEntity <WishlistDto> wishlistData = wishlistController.createWishlist(Dto);
+
+
+        assert wishlistData != null;
+        userService.addWishlistToUser(Objects.requireNonNull(wishlistData.getBody()).getWishlistId(), userEmail);
+    }
+
 }

@@ -1,19 +1,17 @@
 package nl.novi.loahy.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class OrderInputDto {
     private LocalDate orderDate;
-    private String userName;
-    private String userAdres;
-    private String userEmail;
-    private String userPhone;
-
     private Long productId;
     private String productName;
-    private Long productQuantity;
 
-
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private List<Long> productList;
 
     public LocalDate getOrderDate() {
         return orderDate;
@@ -23,38 +21,6 @@ public class OrderInputDto {
         this.orderDate = orderDate;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserAdres() {
-        return userAdres;
-    }
-
-    public void setUserAdres(String userAdres) {
-        this.userAdres = userAdres;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
 
     public Long getProductId() {
         return productId;
@@ -72,11 +38,11 @@ public class OrderInputDto {
         this.productName = productName;
     }
 
-    public Long getProductQuantity() {
-        return productQuantity;
+    public List<Long> getProductList() {
+        return productList;
     }
 
-    public void setProductQuantity(Long productQuantity) {
-        this.productQuantity = productQuantity;
+    public void setProductList(List<Long> productList) {
+        this.productList = productList;
     }
 }
