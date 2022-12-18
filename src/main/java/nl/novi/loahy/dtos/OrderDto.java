@@ -1,49 +1,74 @@
 package nl.novi.loahy.dtos;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDate;
-import java.util.List;
+import nl.novi.loahy.models.Order;
+import java.util.Map;
 
 public class OrderDto {
-    public Integer orderId;
-    public LocalDate orderDate;
+    private Integer id;
 
-    private UserDto userDto;
+    private Map<Integer, String> productList;
+
+    private String comment;
+
+    private CustomerDto customer;
+
+    private String orderDate;
 
 
-    private ProductDto productDto;
+    public static OrderDto fromOrder(Order order) {
 
-    public Integer getOrderId() {
-        return orderId;
+        var dto = new OrderDto();
+
+        dto.setId(order.getId());
+
+        dto.setProductList(order.getProductList());
+
+        dto.setComment(order.getComment());
+
+        dto.setCustomer(CustomerDto.transferToCustomerDto(order.getCustomer()));
+
+        dto.setOrderDate(order.getOrderDate());
+
+        return dto;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public Integer getId() {
+        return id;
     }
 
-    public LocalDate getOrderDate() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Map<Integer, String> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(Map<Integer, String> productList) {
+        this.productList = productList;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public CustomerDto getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerDto customer) {
+        this.customer = customer;
+    }
+
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public UserDto getUserDto() {
-        return userDto;
-    }
-
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
-    }
-
-    public ProductDto getProductDto() {
-        return productDto;
-    }
-
-    public void setProductDto(ProductDto productDto) {
-        this.productDto = productDto;
     }
 }

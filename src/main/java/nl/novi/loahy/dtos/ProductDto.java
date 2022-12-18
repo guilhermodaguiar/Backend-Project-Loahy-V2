@@ -14,8 +14,6 @@ public class ProductDto {
 
     public Double productPrice;
 
-    public OrderDto orderDto;
-
     @JsonSerialize
     FileUploadResponse image;
 
@@ -73,13 +71,4 @@ public class ProductDto {
     public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
-
-    public OrderDto getOrderDto() {
-        return orderDto;
-    }
-
-    public void setOrderDto(OrderDto orderDto) {
-        this.orderDto = orderDto;
-    }
-
 }

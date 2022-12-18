@@ -11,11 +11,6 @@ INSERT INTO customer (customer_id, customer_first_name, customer_last_name, cust
 INSERT INTO customer (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5004, 'Guil', 'Dag', 'Balitraat', '200', 'bis', 'Utrecht', '1244DD', 0644355490);
 
 
-INSERT INTO orders (order_id, order_date) VALUES (1, '2021-02-02');
-INSERT INTO orders (order_id, order_date) VALUES (2, '2021-02-02');
-INSERT INTO orders (order_id, order_date) VALUES (3, '2021-02-02');
-INSERT INTO orders (order_id, order_date) VALUES (4, '2022-07-02');
-
 INSERT INTO wishlists(wishlist_id, wishlist_name) VALUES (200, 'Wishlist van User');
 INSERT INTO wishlists(wishlist_id, wishlist_name) VALUES (201, 'Mijn Hippe Wishlist');
 
@@ -39,11 +34,14 @@ INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1005);
 
 
 INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi', 5001, 200);
-INSERT INTO users (user_email, password, customer_customer_id) VALUES ('admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG', 5002);
-INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 5003, 201);
+INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG', 5002, 201);
+INSERT INTO users (user_email, password, customer_customer_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 5003);
 INSERT INTO users (user_email, password, customer_customer_id) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW', 5004);
 
 INSERT INTO authorities (user_email, authority) VALUES ('user@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('jenfromlombok@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('admin@test.nl', 'ROLE_ADMIN');
 INSERT INTO authorities (user_email, authority) VALUES ('guilfromlombok@test.nl', 'ROLE_USER');
+
+-- INSERT INTO orders (id, productList, comment, customer, order_date) VALUES ();
+-- INSERT INTO orders (id, productList, comment, customer, order_date) VALUES ();

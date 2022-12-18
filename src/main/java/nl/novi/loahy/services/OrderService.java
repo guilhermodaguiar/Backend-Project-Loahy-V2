@@ -1,167 +1,84 @@
 package nl.novi.loahy.services;
 
-
-import nl.novi.loahy.dtos.OrderDto;
-import nl.novi.loahy.dtos.OrderInputDto;
-import nl.novi.loahy.dtos.ProductDto;
+import nl.novi.loahy.dtos.OrderDtoInput;
 import nl.novi.loahy.exceptions.OrderNotFoundException;
 import nl.novi.loahy.models.Order;
 import nl.novi.loahy.models.Product;
+import nl.novi.loahy.repositories.CustomerRepository;
 import nl.novi.loahy.repositories.OrderRepository;
 import nl.novi.loahy.repositories.ProductRepository;
-import nl.novi.loahy.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
+@CrossOrigin
 public class OrderService {
 
+    private final CustomerRepository customerRepository;
     private final OrderRepository orderRepository;
-
-    private final UserRepository userRepository;
-    private final UserService userService;
-
     private final ProductRepository productRepository;
 
 
-    public OrderService(OrderRepository orderRepository, UserRepository userRepository,
-                        UserService userService, ProductRepository productRepository) {
+    public OrderService(CustomerRepository customerRepository,
+                        OrderRepository orderRepository,
+                        ProductRepository productRepository) {
+        this.customerRepository = customerRepository;
         this.orderRepository = orderRepository;
-        this.userRepository = userRepository;
-        this.userService = userService;
         this.productRepository = productRepository;
     }
 
-    public List<OrderDto> getAllOrders() {
-        List<Order> orderList = orderRepository.findAll();
-        return transferOrderListToDto(orderList);
+
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
     }
 
-    public OrderDto getOrderById(Integer orderId) {
-        if (orderRepository.findById(orderId).isPresent()){
-            Order or = orderRepository.findById(orderId).get();
-            OrderDto orderDto =transferToDto(or);
-            if(or.getUser() != null){
-                orderDto.setUserDto(userService.transferToDto(or.getUser()));
+
+
+    public Order createOrder(OrderDtoInput orderDtoInput) {
+        Order order = new Order();
+
+        Map<Integer, String> productList2 = new HashMap<>();
+        List<Integer> productListLong = orderDtoInput.getProductList();
+
+        for (Integer productId : productListLong) {
+            Optional<Product> optional = productRepository.findById(productId);
+
+            if (!productList2.containsKey(productId)) {
+                productList2.put(productId, "1-" + "x " + optional.get().getProductName() + "-" + '_' + '€' + optional.get().getProductPrice());
+            } else {
+                String[] customArr = productList2.get(productId).split("-");
+
+                int quantity = Integer.parseInt(customArr[0]);
+                int actualQuantity = quantity + 1;
+
+                double doubleValue = optional.get().getProductPrice() * actualQuantity;
+                BigDecimal bigDecimalDouble = new BigDecimal(doubleValue);
+
+                BigDecimal bigDecimalWithScale = bigDecimalDouble.setScale(2, RoundingMode.HALF_UP);
+
+                productList2.put(productId, actualQuantity + "-x " + optional.get().getProductName() + "-" + '_' + '€' + bigDecimalWithScale);
+
             }
-            if(or.getProducts() != null){
-              orderDto.setProductDto(ProductDto.transferToDto((Product) or.getProducts()));
-            }
-            return transferToDto(or);
-        } else {
-            throw new OrderNotFoundException(orderId);
         }
-    }
-    
-    
-    public List<OrderDto> transferOrderListToDto(List<Order> orders){
-        List<OrderDto> orderDtoList = new ArrayList<>();
+        order.setProductList(productList2);
+        order.setComment(orderDtoInput.getComment());
+        order.setCustomer(customerRepository.getReferenceById(orderDtoInput.getCustomer()));
+        order.setOrderDate(orderDtoInput.getOrderDate());
 
-        for(Order or : orders) {
-            OrderDto orderDto = transferToDto(or);
-            if(or.getUser() != null){
-                orderDto.setUserDto(userService.transferToDto(or.getUser()));
-            }
-            if(or.getProducts() != null){
-              orderDto.setProductDto(ProductDto.transferToDto((Product) or.getProducts()));
-            }
-            orderDtoList.add(orderDto);
-        }
-        return orderDtoList;
-    }
-    
-    public OrderDto addOrder(OrderInputDto orderInputDto) {
-        Order order = transferToOrder(orderInputDto);
-        orderRepository.save(order);
-        
-        return transferToDto(order);
-    }
-    
-    public void deleteOrder(Integer orderId) {
-        orderRepository.deleteById(orderId);
+        return orderRepository.save(order);
     }
 
 
-    public OrderDto fromOrder(Order order) {
-
-        OrderDto orderDto = new OrderDto();
-
-        orderDto.setOrderId(order.getOrderId());
-        orderDto.setOrderDate(order.getOrderDate());
-
-        return orderDto;
+    public void deleteOrder(Integer id) {
+        orderRepository.deleteById(id);
     }
 
-    public OrderDto updateOrder(Integer orderId, OrderInputDto orderInputDto) {
-        if (orderRepository.findById(orderId).isPresent()){
-
-            Order order = orderRepository.findById(orderId).get();
-
-            Order order1 = transferToOrder(orderInputDto);
-            order1.setOrderId(order.getOrderId());
-
-            orderRepository.save(order1);
-
-            return transferToDto(order1);
-
-        } else {
-
-            throw new  OrderNotFoundException(orderId);
-        }
-    }
-
-    public OrderDto transferToDto(Order order) {
-        OrderDto orderDto = new OrderDto();
-
-        orderDto.setOrderDate(order.getOrderDate());
-        orderDto.setOrderId(order.getOrderId());
-
-        return orderDto;
-    }
-
-
-    public Order transferToOrder(OrderInputDto orderInputDto) {
-        var order = new Order();
-        
-        order.setOrderDate(orderInputDto.getOrderDate());
-
-        return order;
-    }
-
-
-    public void assignUserToOrder(Integer orderId, String userEmail) {
-        var optionalOrder = orderRepository.findById(orderId);
-        var optionalUser = userRepository.findById(userEmail);
-
-        if(optionalOrder.isPresent() && optionalUser.isPresent()) {
-            var order = optionalOrder.get();
-            var user = optionalUser.get();
-
-            order.setUser(user);
-            orderRepository.save(order);
-        } else {
-            throw new OrderNotFoundException(orderId);
-        }
-    }
-
-
-    public void assignProductToOrder(Integer orderId, Integer productId) {
-        var optionalOrder = orderRepository.findById(orderId);
-        var optionalProduct = productRepository.findById(productId);
-
-        if(optionalOrder.isPresent() && optionalProduct.isPresent()) {
-            var order = optionalOrder.get();
-            var product = optionalProduct.get();
-
-            order.setProducts((List<Product>) product);
-            orderRepository.save(order);
-        } else {
-            throw new OrderNotFoundException(orderId);
-        }
-    }
 
 }
-
-

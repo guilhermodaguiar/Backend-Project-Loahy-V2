@@ -58,6 +58,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/users/{user_email/customer/wishlist").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/users/delete/{user_email}").hasRole("ADMIN")
 
+                .antMatchers(HttpMethod.GET, "/customers/all").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/customers/update/{id}").permitAll()
+
                 .antMatchers(HttpMethod.POST, "/contact-remarks/post").permitAll()
                 .antMatchers(HttpMethod.GET, "/contact-remarks/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/contact-remarks/**").hasRole("ADMIN")
@@ -71,15 +74,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/products/{id}/picture").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/products/{id}/picture").hasRole("ADMIN")
 
-
-                .antMatchers(HttpMethod.GET, "/orders/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/orders/{id}").permitAll()
                 .antMatchers(HttpMethod.POST, "/orders/create").permitAll()
-                .antMatchers(HttpMethod.PUT, "/orders/{id}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/orders/{id}/{userId}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/orders/{id}/{productId}").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/orders/delete/{id}").hasRole("ADMIN")
-
+                .antMatchers(HttpMethod.GET, "/orders/all").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/products/image-upload").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/products/image-delete").hasRole("ADMIN")

@@ -1,13 +1,14 @@
-
 package nl.novi.loahy.controllers;
 
 
 import nl.novi.loahy.dtos.OrderDto;
-import nl.novi.loahy.dtos.OrderInputDto;
+import nl.novi.loahy.dtos.OrderDtoInput;
+import nl.novi.loahy.models.Order;
 import nl.novi.loahy.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -22,53 +23,37 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping(value = "/all")
-    public ResponseEntity<List<OrderDto>> getAllOrders() {
-        List<OrderDto> orderDtos = orderService.getAllOrders();
 
-        return ResponseEntity.ok().body(orderDtos);
+    @GetMapping("/all")
+    public List<OrderDto> getDeliveryRequests() {
+
+        var dtos = new ArrayList<OrderDto>();
+        List<Order> orderList;
+
+        var orders = orderService.getOrders();
+        for (Order order : orders) {
+            dtos.add(OrderDto.fromOrder(order));
+        }
+        return dtos;
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<OrderDto> getOrder(@PathVariable("id") Integer orderId) {
 
-        OrderDto order = orderService.getOrderById(orderId);
 
-        return ResponseEntity.ok().body(order);
+
+    @PostMapping("/create")
+    public Order createOrder(@RequestBody OrderDtoInput dto){
+
+        return orderService.createOrder(dto);
     }
 
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<OrderDto> addOrder(@RequestBody OrderInputDto orderInputDto) {
 
-        OrderDto orderDto = orderService.addOrder(orderInputDto);
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<?> deleteOrder(@PathVariable("id")Integer id){
+        orderService.deleteOrder(id);
 
-        return ResponseEntity.created(null).body(orderDto);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<OrderDto> updateOrder(@PathVariable("id") Integer orderId,
-                                                @RequestBody OrderInputDto orderInputDto) {
-
-        OrderDto orderDto = orderService.updateOrder(orderId, orderInputDto);
-
-        return ResponseEntity.ok().body(orderDto);
-    }
-
-    @DeleteMapping(value = "delete/{id}")
-    public ResponseEntity<OrderDto> deleteOrder(@PathVariable("id") Integer orderId) {
-        orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}/{userId}")
-    public void assignUserToOrder(@PathVariable("id") Integer orderId, @PathVariable("userId") String userEmail) {
-        orderService.assignUserToOrder(orderId, userEmail);
-    }
-
-    @PutMapping(value = "/{id}/{productId}")
-    public void assignProductToOrder(@PathVariable("id") Integer orderId, @PathVariable("productId") Integer productId) {
-        orderService.assignProductToOrder(orderId, productId);
-    }
 
 }

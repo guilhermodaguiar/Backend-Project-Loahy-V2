@@ -31,6 +31,7 @@ public class User {
     Wishlist wishlist;
 
 
+
     public User(String userEmail, String password, Customer customer, Set<Authority> authorities,
                 Wishlist wishlist) {
         this.userEmail = userEmail;

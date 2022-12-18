@@ -1,8 +1,9 @@
 package nl.novi.loahy.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 public class Product {
 
     @Id
@@ -36,10 +38,6 @@ public class Product {
 
     @OneToOne
     FileUploadResponse image;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id")
-    private Order order;
 
     @OneToMany(mappedBy = "wishlist")
     @JsonIgnore
@@ -104,13 +102,6 @@ public class Product {
         this.image = image;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public List<WishlistProduct> getWishlistProducts() {
         return wishlistProducts;
